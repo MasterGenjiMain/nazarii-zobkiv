@@ -1,5 +1,6 @@
-package com.epam.spring.homework2.beans;
+package com.epam.spring.homework2.propertyBeans;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,9 +1,9 @@
-package com.epam.spring.homework2.beans;
+package com.epam.spring.homework2.propertyBeans;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class BeanC {
+public class BeanD {
     private String name;
     private int value;
 
