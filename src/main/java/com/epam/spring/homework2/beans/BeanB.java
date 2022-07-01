@@ -3,7 +3,7 @@ package com.epam.spring.homework2.beans;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BeanB {
+public class BeanB implements BeanInterface {
     private final String name;
     private final int value;
 

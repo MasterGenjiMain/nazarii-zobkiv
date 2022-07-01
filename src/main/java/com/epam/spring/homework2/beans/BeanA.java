@@ -5,7 +5,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BeanA implements InitializingBean, DisposableBean {
+public class BeanA implements InitializingBean, DisposableBean, BeanInterface {
     private String name;
     private int value;
 

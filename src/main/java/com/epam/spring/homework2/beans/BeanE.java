@@ -6,7 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 @Component
-public class BeanE {
+public class BeanE implements BeanInterface {
     private String name;
     private int value;
 
