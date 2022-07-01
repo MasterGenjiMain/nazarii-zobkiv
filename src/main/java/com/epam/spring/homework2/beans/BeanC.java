@@ -4,10 +4,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BeanC implements BeanInterface {
-    private final String name;
-    private final int value;
+    private String name;
+    private int value;
 
-    public BeanC(String name, int value) {      //idk what`s going on because autowiring works well
+    public BeanC(String name, int value) {
         this.name = name;
         this.value = value;
 
@@ -22,9 +22,20 @@ public class BeanC implements BeanInterface {
         System.out.println("Destroy: " + this.getClass().getSimpleName());
     }
 
+    public void validate(){
+        if (name == null || value < 0) {
+            System.out.println(this.getClass().getSimpleName() + "has a bad fields");
+            if (name == null) {
+                name = "Empty";
+            }
+        } else {
+            System.out.println("Fields validated");
+        }
+    }
+
     @Override
     public String toString() {
-        return "BeanA{" +
+        return "BeanC{" +
                 "name='" + name + '\'' +
                 ", value=" + value +
                 '}';

@@ -28,4 +28,15 @@ public class BeanA implements InitializingBean, DisposableBean, BeanInterface {
         value = 0;
         System.out.println("afterPropertiesSet() name: " + name + " value: " + value);
     }
+
+    public void validate(){
+        if (name == null || value < 0) {
+            System.out.println(this.getClass().getSimpleName() + "has a bad fields");
+            if (name == null) {
+                name = "Empty";
+            }
+        } else {
+            System.out.println("Fields validated");
+        }
+    }
 }

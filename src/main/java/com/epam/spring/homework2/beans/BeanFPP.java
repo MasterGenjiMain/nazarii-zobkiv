@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 public class BeanFPP implements BeanFactoryPostProcessor {
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
-        configurableListableBeanFactory.getBeanDefinition("getBeanB").setInitMethodName("secondInitMethod");
+        configurableListableBeanFactory.getBeanDefinition("getBeanB").setInitMethodName("initMethodFPP");
     }
 }

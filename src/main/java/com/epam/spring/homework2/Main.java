@@ -13,7 +13,10 @@ public class Main {
         ApplicationContext context = new AnnotationConfigApplicationContext(PropertiesConfig.class);
 
         System.out.println("----------------------------");
-        Arrays.stream(context.getBeanDefinitionNames()).filter(s -> s.contains("get")).forEach(System.out::println);
+        Arrays.stream(context.getBeanDefinitionNames()).filter(s -> s.contains("getBean")).forEach(System.out::println);
+
+        System.out.println("----------------------------");
+        context.getBean(GeneralBean.class).printBeans();
 
     }
 }

@@ -20,9 +20,20 @@ public class BeanE implements BeanInterface {
         System.out.println("Pre destroy functions of bean: " + this.getClass().getSimpleName());
     }
 
+    public void validate(){
+        if (name == null || value < 0) {
+            System.out.println(this.getClass().getSimpleName() + "has a bad fields");
+            if (name == null) {
+                name = "Empty";
+            }
+        } else {
+            System.out.println("Fields validated");
+        }
+    }
+
     @Override
     public String toString() {
-        return "BeanA{" +
+        return "BeanE{" +
                 "name='" + name + '\'' +
                 ", value=" + value +
                 '}';

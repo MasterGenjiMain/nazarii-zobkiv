@@ -23,4 +23,19 @@ public class BasicConfig {
     public BeanF getBeanF() {
         return new BeanF();
     }
+
+    @Bean
+    public GeneralBean getGeneralBean(){
+        return new GeneralBean();
+    }
+
+    @Bean
+    public BeanFPP getBeanFPP(){
+        return new BeanFPP();
+    }
+
+    @Bean
+    public BeanPP getBeanPP() {
+        return new BeanPP();
+    }
 }
