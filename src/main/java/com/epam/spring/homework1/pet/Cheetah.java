@@ -4,9 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Cheetah implements Animal {
-    //    public Cheetah() {
-//        System.out.println(this.getClass().getSimpleName());
-//    }
+
     @Override
     public String toString() {
         return "Cheetah";
