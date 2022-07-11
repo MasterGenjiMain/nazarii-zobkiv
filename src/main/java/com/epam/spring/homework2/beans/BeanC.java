@@ -3,9 +3,7 @@ package com.epam.spring.homework2.beans;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BeanC implements BeanInterface {
-    private String name;
-    private int value;
+public class BeanC extends GeneralBean {
 
     public BeanC(String name, int value) {
         this.name = name;
@@ -20,24 +18,5 @@ public class BeanC implements BeanInterface {
 
     public void destroyMethod(){
         System.out.println("Destroy: " + this.getClass().getSimpleName());
-    }
-
-    public void validate(){
-        if (name == null || value < 0) {
-            System.out.println(this.getClass().getSimpleName() + "has a bad fields");
-            if (name == null) {
-                name = "Empty";
-            }
-        } else {
-            System.out.println("Fields validated");
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "BeanC{" +
-                "name='" + name + '\'' +
-                ", value=" + value +
-                '}';
     }
 }

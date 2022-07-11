@@ -2,6 +2,7 @@ package com.epam.spring.homework2.config;
 
 import com.epam.spring.homework2.beans.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 
@@ -16,18 +17,18 @@ public class PropertiesConfig {
 
     @Bean(initMethod = "initMethod", destroyMethod = "destroyMethod")
     @DependsOn("getBeanD")
-    public BeanB getBeanB() {
-        return new BeanB(env.getProperty("beanB.name"), Integer.parseInt(Objects.requireNonNull(env.getProperty("beanB.value"))));
+    public BeanB getBeanB(@Value("${beanB.name}") final String name, @Value("${beanB.value}") final int value) {
+        return new BeanB(name, value);
     }
 
     @Bean(initMethod = "initMethod", destroyMethod = "destroyMethod")
     @DependsOn("getBeanB")
-    public BeanC getBeanC() {
-        return new BeanC(env.getProperty("beanC.name"), Integer.parseInt(Objects.requireNonNull(env.getProperty("beanC.value"))));
+    public BeanC getBeanC(@Value("${beanC.name}") final String name, @Value("${beanC.value}") final int value) {
+        return new BeanC(name, value);
     }
 
     @Bean(initMethod = "initMethod", destroyMethod = "destroyMethod")
-    public BeanD getBeanD() {
-        return new BeanD(env.getProperty("beanD.name"), Integer.parseInt(Objects.requireNonNull(env.getProperty("beanD.value"))));
+    public BeanD getBeanD(@Value("${beanD.name}") final String name, @Value("${beanD.value}") final int value) {
+        return new BeanD(name, value);
     }
 }

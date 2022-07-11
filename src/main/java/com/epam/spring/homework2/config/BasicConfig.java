@@ -25,11 +25,6 @@ public class BasicConfig {
     }
 
     @Bean
-    public GeneralBean getGeneralBean(){
-        return new GeneralBean();
-    }
-
-    @Bean
     public BeanFPP getBeanFPP(){
         return new BeanFPP();
     }

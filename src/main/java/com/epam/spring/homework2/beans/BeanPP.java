@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 public class BeanPP implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        if (bean instanceof BeanInterface) {
-            ((BeanInterface) bean).validate();
+        if (bean instanceof GeneralBean) {
+            ((GeneralBean) bean).validate();
         }
         return BeanPostProcessor.super.postProcessAfterInitialization(bean, beanName);
     }

@@ -1,6 +1,5 @@
 package com.epam.spring.homework2;
 
-import com.epam.spring.homework2.beans.GeneralBean;
 import com.epam.spring.homework2.config.PropertiesConfig;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -15,7 +14,9 @@ public class Main {
         Arrays.stream(context.getBeanDefinitionNames()).filter(s -> s.contains("getBean")).forEach(System.out::println);
 
         System.out.println("----------------------------");
-        context.getBean(GeneralBean.class).printBeans();
+        for (String beanName : context.getBeanDefinitionNames()) {
+            System.out.println(beanName);
+        }
 
     }
 }

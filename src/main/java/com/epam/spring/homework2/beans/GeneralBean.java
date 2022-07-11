@@ -1,22 +1,32 @@
 package com.epam.spring.homework2.beans;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
-
-@Component
-public class GeneralBean {
+public abstract class GeneralBean  {
 
     protected String name;
     protected int value;
 
-    @Autowired
-    private List<BeanInterface> beans;
+    public GeneralBean() {
+    }
 
-    public void printBeans(){
-        for (BeanInterface bean: beans){
-            System.out.println(bean);
+    public GeneralBean(String name, int value) {
+        this.name = name;
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "BeanEntity{" +
+                "name='" + name + '\'' +
+                ", value=" + value +
+                '}';
+    }
+
+    public void validate() {
+        System.out.println("|VALIDATOR|");
+        if (name == null || value < 0) {
+            System.out.println(this.getClass().getSimpleName() + " has a no valid field! Current name: " + name + " ; value: " + value);
+        } else {
+            System.out.println(this.getClass().getSimpleName() + " field valid! Current name: " + name + " ; value: " + value);
         }
     }
 }
