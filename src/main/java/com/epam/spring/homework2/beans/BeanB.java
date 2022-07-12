@@ -1,8 +1,5 @@
 package com.epam.spring.homework2.beans;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class BeanB extends GeneralBean {
 
     public BeanB(String name, int value) {
