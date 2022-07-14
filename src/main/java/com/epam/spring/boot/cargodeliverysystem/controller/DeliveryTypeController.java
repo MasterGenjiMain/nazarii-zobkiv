@@ -1,0 +1,45 @@
+package com.epam.spring.boot.cargodeliverysystem.controller;
+
+import com.epam.spring.boot.cargodeliverysystem.dto.DeliveryTypeDto;
+import com.epam.spring.boot.cargodeliverysystem.service.DeliveryTypeService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+@Slf4j
+@RestController
+@RequestMapping("/deliveryTypes")
+@RequiredArgsConstructor
+public class DeliveryTypeController {
+
+    private final DeliveryTypeService deliveryTypeService;
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/{typeName}")
+    public DeliveryTypeDto getDeliveryType(@PathVariable String typeName) {
+        log.info("[Controller] getDeliveryType by name {} ", typeName);
+        return deliveryTypeService.getDeliveryType(typeName);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public DeliveryTypeDto addDeliveryType(@RequestBody DeliveryTypeDto deliveryTypeDto) {
+        log.info("[Controller] addDeliveryType {} ", deliveryTypeDto);
+        return deliveryTypeService.addDeliveryType(deliveryTypeDto);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping(value = "/{typeName}")
+    public DeliveryTypeDto updateDeliveryType(@PathVariable String typeName, @RequestBody DeliveryTypeDto deliveryTypeDto) {
+        log.info("[Controller] updateDeliveryType by name {} ", typeName);
+        return deliveryTypeService.updateDeliveryType(typeName, deliveryTypeDto);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(value = "/{typeName}")
+    public boolean deleteDeliveryType(@PathVariable String typeName) {
+        log.info("[Controller] deleteDeliveryType by name {} ", typeName);
+        return deliveryTypeService.deleteDeliveryType(typeName);
+    }
+}
