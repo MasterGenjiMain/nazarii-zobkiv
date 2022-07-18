@@ -1,6 +1,7 @@
 package com.epam.spring.boot.cargodeliverysystem.service.impl;
 
 import com.epam.spring.boot.cargodeliverysystem.dto.DeliveryTypeDto;
+import com.epam.spring.boot.cargodeliverysystem.mapper.DeliveryTypeMapper;
 import com.epam.spring.boot.cargodeliverysystem.model.DeliveryType;
 import com.epam.spring.boot.cargodeliverysystem.repository.DeliveryTypeRepository;
 import com.epam.spring.boot.cargodeliverysystem.service.DeliveryTypeService;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 public class DeliveryTypeServiceImpl implements DeliveryTypeService {
 
     private final DeliveryTypeRepository deliveryTypeRepository;
+    private final DeliveryTypeMapper deliveryTypeMapper;
 
     @Override
     public List<DeliveryTypeDto> getAllDeliveryTypes() {
@@ -24,7 +26,7 @@ public class DeliveryTypeServiceImpl implements DeliveryTypeService {
         return deliveryTypeRepository
                 .getAllDeliveryTypes()
                 .stream()
-                .map(this::mapDeliveryTypeToDeliveryTypeDto)
+                .map(deliveryTypeMapper::mapDeliveryTypeToDeliveryTypeDto)
                 .collect(Collectors.toList());
     }
 
@@ -32,7 +34,7 @@ public class DeliveryTypeServiceImpl implements DeliveryTypeService {
     public DeliveryTypeDto getDeliveryType(String typeName) {
         log.info("getDeliveryType by name {}", typeName);
         DeliveryType deliveryType = deliveryTypeRepository.getDeliveryTypeByName(typeName);
-        return mapDeliveryTypeToDeliveryTypeDto(deliveryType);
+        return deliveryTypeMapper.mapDeliveryTypeToDeliveryTypeDto(deliveryType);
     }
 
     @Override
@@ -40,45 +42,29 @@ public class DeliveryTypeServiceImpl implements DeliveryTypeService {
         log.info("getDeliveryTypesByLanguageId {}", id);
         List<DeliveryType> deliveryTypeList = deliveryTypeRepository.getDeliveryTypesByLanguageId(id);
         return deliveryTypeList.stream()
-                .map(this::mapDeliveryTypeToDeliveryTypeDto)
+                .map(deliveryTypeMapper::mapDeliveryTypeToDeliveryTypeDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public DeliveryTypeDto addDeliveryType(DeliveryTypeDto deliveryTypeDto) {
         log.info("addDeliveryType with name {}", deliveryTypeDto.getTypeName());
-        DeliveryType deliveryType = mapDeliveryTypeDtoToDeliveryType(deliveryTypeDto);
+        DeliveryType deliveryType = deliveryTypeMapper.mapDeliveryTypeDtoToDeliveryType(deliveryTypeDto);
         deliveryType = deliveryTypeRepository.addDeliveryType(deliveryType);
-        return mapDeliveryTypeToDeliveryTypeDto(deliveryType);
+        return deliveryTypeMapper.mapDeliveryTypeToDeliveryTypeDto(deliveryType);
     }
 
     @Override
     public DeliveryTypeDto updateDeliveryType(String typeName, DeliveryTypeDto deliveryTypeDto) {
         log.info("updateDeliveryOrder with name {}", typeName);
-        DeliveryType deliveryType = mapDeliveryTypeDtoToDeliveryType(deliveryTypeDto);
+        DeliveryType deliveryType = deliveryTypeMapper.mapDeliveryTypeDtoToDeliveryType(deliveryTypeDto);
         deliveryType = deliveryTypeRepository.updateDeliveryType(typeName, deliveryType);
-        return mapDeliveryTypeToDeliveryTypeDto(deliveryType);
+        return deliveryTypeMapper.mapDeliveryTypeToDeliveryTypeDto(deliveryType);
     }
 
     @Override
     public boolean deleteDeliveryType(String typeName) {
         log.info("deleteDeliveryOrder with name {}", typeName);
         return deliveryTypeRepository.deleteDeliveryType(typeName);
-    }
-
-    private DeliveryTypeDto mapDeliveryTypeToDeliveryTypeDto(DeliveryType deliveryType) {
-        return DeliveryTypeDto.builder()
-                .id(deliveryType.getId())
-                .typeName(deliveryType.getTypeName())
-                .languageId(deliveryType.getLanguageId())
-                .build();
-    }
-
-    private DeliveryType mapDeliveryTypeDtoToDeliveryType(DeliveryTypeDto deliveryTypeDto) {
-        return DeliveryType.builder()
-                .id(deliveryTypeDto.getId())
-                .typeName(deliveryTypeDto.getTypeName())
-                .languageId(deliveryTypeDto.getLanguageId())
-                .build();
     }
 }
