@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -16,8 +19,18 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     private final DeliveryOrderRepository deliveryOrderRepository;
 
     @Override
+    public List<DeliveryOrderDto> getAllDeliveryOrders() {
+        log.info("getAllDeliveryOrders {}", "");
+        return deliveryOrderRepository
+                .getAllDeliveryOrders()
+                .stream()
+                .map(this::mapDeliveryOrderToDeliveryOrderDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public DeliveryOrderDto getDeliveryOrder(long id) {
-        log.info("getCity by id {}", id);
+        log.info("getDeliveryOrder by id {}", id);
         DeliveryOrder deliveryOrder = deliveryOrderRepository.getDeliveryOrder(id);
         return mapDeliveryOrderToDeliveryOrderDto(deliveryOrder);
     }

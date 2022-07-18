@@ -15,12 +15,26 @@ public class TariffRepositoryImpl implements TariffRepository {
     private final List<Tariff> tariffList = new ArrayList<>();
 
     @Override
-    public Tariff getTariff(String tariffName) {
+    public List<Tariff> getAllTariffs() {
+        log.info("[Repository] getAllTariffs {} ", "");
+        return tariffList;
+    }
+
+    @Override
+    public Tariff getTariffByName(String tariffName) {
         log.info("[Repository] getTariff by name {} ", tariffName);
         return tariffList.stream()
                 .filter(t -> t.getTariffName().equals(tariffName))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Tariff is not found!"));
+    }
+
+    @Override
+    public List<Tariff> getTariffsByLanguageId(long id) {
+        log.info("[Repository] getTariffByLanguageId by id {} ", id);
+        return tariffList.stream()
+                .filter(tariff -> tariff.getLanguageId() == id)
+                .toList();
     }
 
     @Override

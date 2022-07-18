@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/receipts")
@@ -20,6 +22,13 @@ public class ReceiptController {
     public ReceiptDto getReceipt(@PathVariable long id) {
         log.info("[Controller] getReceipt by id {} ", id);
         return receiptService.getReceipt(id);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping
+    public List<ReceiptDto> getAllReceipts() {
+        log.info("[Controller] getAllReceipts {} ", "");
+        return receiptService.getAllReceipts();
     }
 
     @ResponseStatus(HttpStatus.CREATED)

@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -16,10 +19,28 @@ public class TariffServiceImpl implements TariffService {
     private final TariffRepository tariffRepository;
 
     @Override
+    public List<TariffDto> getAllTariffs() {
+        log.info("getAllTariffs {}", "");
+        return tariffRepository.getAllTariffs()
+                .stream()
+                .map(this::mapTariffToTariffDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public TariffDto getTariff(String tariffName) {
         log.info("getTariff by name {}", tariffName);
-        Tariff tariff = tariffRepository.getTariff(tariffName);
+        Tariff tariff = tariffRepository.getTariffByName(tariffName);
         return mapTariffToTariffDto(tariff);
+    }
+
+    @Override
+    public List<TariffDto> getTariffsByLanguageId(long id) {
+        log.info("getTariffsByLanguageId {}", id);
+        return tariffRepository.getTariffsByLanguageId(id)
+                .stream()
+                .map(this::mapTariffToTariffDto)
+                .collect(Collectors.toList());
     }
 
     @Override

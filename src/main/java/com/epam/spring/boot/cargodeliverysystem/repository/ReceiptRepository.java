@@ -2,7 +2,11 @@ package com.epam.spring.boot.cargodeliverysystem.repository;
 
 import com.epam.spring.boot.cargodeliverysystem.model.Receipt;
 
+import java.util.List;
+
 public interface ReceiptRepository {
+
+    List<Receipt> getAllReceipts();
 
     Receipt getReceipt(long id);
 

@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/tariffs")
@@ -21,6 +23,21 @@ public class TariffController {
         log.info("[Controller] getTariff by name {} ", tariffName);
         return tariffService.getTariff(tariffName);
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping
+    public List<TariffDto> getAllTariffs() {
+        log.info("[Controller] getAllTariffs {} ", "");
+        return tariffService.getAllTariffs();
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/language/{id}")
+    public List<TariffDto> getAllTariffsByLanguageId(@PathVariable long id) {
+        log.info("[Controller] getAllTariffsByLanguageId {} ", id);
+        return tariffService.getTariffsByLanguageId(id);
+    }
+
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping

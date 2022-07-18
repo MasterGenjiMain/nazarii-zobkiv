@@ -8,12 +8,24 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class LocationServiceImpl implements LocationService {
 
     private final LocationRepository locationRepository;
+
+    @Override
+    public List<LocationDto> getAllLocations() {
+        log.info("getAllLocations {}", "");
+        return locationRepository.getAllLocations()
+                .stream()
+                .map(this::mapLocationToLocationDto)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public LocationDto getLocation(String locationName) {

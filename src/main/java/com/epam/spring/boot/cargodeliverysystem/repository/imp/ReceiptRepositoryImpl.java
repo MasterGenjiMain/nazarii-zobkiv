@@ -15,6 +15,11 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
     private final List<Receipt> receiptList = new ArrayList<>();
 
     @Override
+    public List<Receipt> getAllReceipts() {
+        return receiptList;
+    }
+
+    @Override
     public Receipt getReceipt(long id) {
         log.info("[Repository] getReceipt by id {} ", id);
         return receiptList.stream()

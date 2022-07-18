@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/deliveryTypes")
@@ -20,6 +22,20 @@ public class DeliveryTypeController {
     public DeliveryTypeDto getDeliveryType(@PathVariable String typeName) {
         log.info("[Controller] getDeliveryType by name {} ", typeName);
         return deliveryTypeService.getDeliveryType(typeName);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping
+    public List<DeliveryTypeDto> getAllDeliveryTypes(){
+        log.info("[Controller] getAllDeliveryTypes {} ", "");
+        return deliveryTypeService.getAllDeliveryTypes();
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/language/{id}")
+    public List<DeliveryTypeDto> getAllByLanguageId(@PathVariable long id){
+        log.info("[Controller] getAllByLanguageId by id {} ", id);
+        return deliveryTypeService.getDeliveryTypesByLanguageId(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)

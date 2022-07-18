@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/locations")
@@ -20,6 +22,13 @@ public class LocationController {
     public LocationDto getLocation(@PathVariable String locName) {
         log.info("[Controller] getLocation by name {} ", locName);
         return locationService.getLocation(locName);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping
+    public List<LocationDto> getAllLocations(){
+        log.info("[Controller] getAllLocations {} ", "");
+        return locationService.getAllLocations();
     }
 
     @ResponseStatus(HttpStatus.CREATED)

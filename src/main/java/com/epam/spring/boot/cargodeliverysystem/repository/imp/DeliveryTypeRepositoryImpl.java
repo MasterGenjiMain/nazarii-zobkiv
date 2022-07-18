@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -15,12 +16,26 @@ public class DeliveryTypeRepositoryImpl implements DeliveryTypeRepository {
     private final List<DeliveryType> deliveryTypeList = new ArrayList<>();
 
     @Override
-    public DeliveryType getDeliveryType(String typeName) {
+    public List<DeliveryType> getAllDeliveryTypes() {
+        log.info("[Repository] getAllDeliveryTypes {} ", deliveryTypeList);
+        return deliveryTypeList;
+    }
+
+    @Override
+    public DeliveryType getDeliveryTypeByName(String typeName) {
         log.info("[Repository] getDeliveryType by name {} ", typeName);
         return deliveryTypeList.stream()
                 .filter(type -> type.getTypeName().equals(typeName))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Delivery Type is not found!"));
+    }
+
+    @Override
+    public List<DeliveryType> getDeliveryTypesByLanguageId(long id) {
+        log.info("[Repository] getDeliveryTypeByLanguageId by id {} ", id);
+        return deliveryTypeList.stream()
+                .filter(type -> type.getLanguageId() == id)
+                .toList();
     }
 
     @Override

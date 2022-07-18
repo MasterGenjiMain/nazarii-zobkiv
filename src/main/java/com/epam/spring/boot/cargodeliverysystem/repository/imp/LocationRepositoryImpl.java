@@ -15,6 +15,11 @@ public class LocationRepositoryImpl implements LocationRepository {
     private final List<Location> locationList = new ArrayList<>();
 
     @Override
+    public List<Location> getAllLocations() {
+        return locationList;
+    }
+
+    @Override
     public Location getLocation(String locationName) {
         log.info("[Repository] getLocation by name {} ", locationName);
         return locationList.stream()

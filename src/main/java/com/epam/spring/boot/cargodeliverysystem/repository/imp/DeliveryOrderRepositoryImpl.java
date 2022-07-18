@@ -24,6 +24,12 @@ public class DeliveryOrderRepositoryImpl implements DeliveryOrderRepository {
     }
 
     @Override
+    public List<DeliveryOrder> getAllDeliveryOrders() {
+        log.info("[Repository] getAllDeliveryOrders {} ", deliveryOrderList);
+        return deliveryOrderList;
+    }
+
+    @Override
     public DeliveryOrder createDeliveryOrder(DeliveryOrder deliveryOrder) {
         log.info("[Repository] createDeliveryOrder {} ", deliveryOrder);
         deliveryOrderList.add(deliveryOrder);
