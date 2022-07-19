@@ -58,6 +58,10 @@ public class DeliveryTypeServiceImpl implements DeliveryTypeService {
     public DeliveryTypeDto updateDeliveryType(String typeName, DeliveryTypeDto deliveryTypeDto) {
         log.info("updateDeliveryOrder with name {}", typeName);
         DeliveryType deliveryType = deliveryTypeMapper.mapDeliveryTypeDtoToDeliveryType(deliveryTypeDto);
+
+        DeliveryType oldDeliveryType = deliveryTypeRepository.getDeliveryTypeByName(typeName);
+        deliveryType.setId(oldDeliveryType.getId());
+
         deliveryType = deliveryTypeRepository.updateDeliveryType(typeName, deliveryType);
         return deliveryTypeMapper.mapDeliveryTypeToDeliveryTypeDto(deliveryType);
     }

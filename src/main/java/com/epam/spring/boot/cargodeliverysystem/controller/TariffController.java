@@ -1,10 +1,13 @@
 package com.epam.spring.boot.cargodeliverysystem.controller;
 
 import com.epam.spring.boot.cargodeliverysystem.dto.TariffDto;
+import com.epam.spring.boot.cargodeliverysystem.dto.group.OnCreate;
+import com.epam.spring.boot.cargodeliverysystem.dto.group.OnUpdate;
 import com.epam.spring.boot.cargodeliverysystem.service.TariffService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,14 +44,14 @@ public class TariffController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public TariffDto addTariff(@RequestBody TariffDto tariffDto) {
+    public TariffDto addTariff(@RequestBody @Validated(OnCreate.class) TariffDto tariffDto) {
         log.info("[Controller] addTariff {} ", tariffDto);
         return tariffService.addTariff(tariffDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/{tariffName}")
-    public TariffDto updateTariff(@PathVariable String tariffName, @RequestBody TariffDto tariffDto) {
+    public TariffDto updateTariff(@PathVariable String tariffName, @RequestBody @Validated(OnUpdate.class) TariffDto tariffDto) {
         log.info("[Controller] updateTariff {} by name ", tariffName);
         return tariffService.updateTariff(tariffName, tariffDto);
     }

@@ -1,10 +1,13 @@
 package com.epam.spring.boot.cargodeliverysystem.controller;
 
 import com.epam.spring.boot.cargodeliverysystem.dto.LanguageDto;
+import com.epam.spring.boot.cargodeliverysystem.dto.group.OnCreate;
+import com.epam.spring.boot.cargodeliverysystem.dto.group.OnUpdate;
 import com.epam.spring.boot.cargodeliverysystem.service.LanguageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -24,14 +27,14 @@ public class LanguageController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public LanguageDto addLanguage(@RequestBody LanguageDto languageDto) {
+    public LanguageDto addLanguage(@RequestBody @Validated(OnCreate.class) LanguageDto languageDto) {
         log.info("[Controller] addLanguage {} ", languageDto);
         return languageService.addLanguage(languageDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/{langName}")
-    public LanguageDto updateLanguage(@PathVariable String langName, @RequestBody LanguageDto languageDto) {
+    public LanguageDto updateLanguage(@PathVariable String langName, @RequestBody @Validated(OnUpdate.class) LanguageDto languageDto) {
         log.info("[Controller] updateLanguage by name {} ", langName);
         return languageService.updateLanguage(langName, languageDto);
     }

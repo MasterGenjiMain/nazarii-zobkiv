@@ -49,6 +49,10 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     public DeliveryOrderDto updateDeliveryOrder(long id, DeliveryOrderDto deliveryOrderDto) {
         log.info("updateUser with id {}", id);
         DeliveryOrder deliveryOrder = deliveryOrderMapper.mapDeliveryOrderDtoToDeliveryOrder(deliveryOrderDto);
+
+        DeliveryOrder oldDeliveryOrder = deliveryOrderRepository.getDeliveryOrder(id);
+        deliveryOrder.setId(oldDeliveryOrder.getId());
+
         deliveryOrder = deliveryOrderRepository.updateDeliveryOrder(id, deliveryOrder);
         return deliveryOrderMapper.mapDeliveryOrderToDeliveryOrderDto(deliveryOrder);
     }

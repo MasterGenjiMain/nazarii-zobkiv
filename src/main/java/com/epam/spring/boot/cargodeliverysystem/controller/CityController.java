@@ -1,10 +1,13 @@
 package com.epam.spring.boot.cargodeliverysystem.controller;
 
 import com.epam.spring.boot.cargodeliverysystem.dto.CityDto;
+import com.epam.spring.boot.cargodeliverysystem.dto.group.OnCreate;
+import com.epam.spring.boot.cargodeliverysystem.dto.group.OnUpdate;
 import com.epam.spring.boot.cargodeliverysystem.service.CityService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -24,14 +27,14 @@ public class CityController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public CityDto addCity(@RequestBody CityDto cityDto) {
+    public CityDto addCity(@RequestBody @Validated(OnCreate.class) CityDto cityDto) {
         log.info("[Controller] addCity {} ", cityDto);
         return cityService.addCity(cityDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/{name}")
-    public CityDto updateCity(@PathVariable String name, @RequestBody CityDto cityDto) {
+    public CityDto updateCity(@PathVariable String name, @RequestBody @Validated(OnUpdate.class) CityDto cityDto) {
         log.info("[Controller] updateCity by name {} ", name);
         return cityService.updateCity(name, cityDto);
     }

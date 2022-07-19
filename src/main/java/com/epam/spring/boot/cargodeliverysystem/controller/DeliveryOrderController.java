@@ -1,10 +1,13 @@
 package com.epam.spring.boot.cargodeliverysystem.controller;
 
 import com.epam.spring.boot.cargodeliverysystem.dto.DeliveryOrderDto;
+import com.epam.spring.boot.cargodeliverysystem.dto.group.OnCreate;
+import com.epam.spring.boot.cargodeliverysystem.dto.group.OnUpdate;
 import com.epam.spring.boot.cargodeliverysystem.service.DeliveryOrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,14 +36,14 @@ public class DeliveryOrderController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public DeliveryOrderDto createDeliveryOrder(@RequestBody DeliveryOrderDto deliveryOrderDto) {
+    public DeliveryOrderDto createDeliveryOrder(@RequestBody @Validated(OnCreate.class) DeliveryOrderDto deliveryOrderDto) {
         log.info("[Controller] createDeliveryOrder {} ", deliveryOrderDto);
         return deliveryOrderService.createDeliveryOrder(deliveryOrderDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/{id}")
-    public DeliveryOrderDto updateDeliveryOrder(@PathVariable long id, @RequestBody DeliveryOrderDto deliveryOrderDto) {
+    public DeliveryOrderDto updateDeliveryOrder(@PathVariable long id, @RequestBody @Validated(OnUpdate.class) DeliveryOrderDto deliveryOrderDto) {
         log.info("[Controller] updateDeliveryOrder by id {} ", id);
         return deliveryOrderService.updateDeliveryOrder(id, deliveryOrderDto);
     }

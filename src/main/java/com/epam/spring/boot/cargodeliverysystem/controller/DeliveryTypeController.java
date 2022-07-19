@@ -1,10 +1,13 @@
 package com.epam.spring.boot.cargodeliverysystem.controller;
 
 import com.epam.spring.boot.cargodeliverysystem.dto.DeliveryTypeDto;
+import com.epam.spring.boot.cargodeliverysystem.dto.group.OnCreate;
+import com.epam.spring.boot.cargodeliverysystem.dto.group.OnUpdate;
 import com.epam.spring.boot.cargodeliverysystem.service.DeliveryTypeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,14 +43,14 @@ public class DeliveryTypeController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public DeliveryTypeDto addDeliveryType(@RequestBody DeliveryTypeDto deliveryTypeDto) {
+    public DeliveryTypeDto addDeliveryType(@RequestBody @Validated(OnCreate.class) DeliveryTypeDto deliveryTypeDto) {
         log.info("[Controller] addDeliveryType {} ", deliveryTypeDto);
         return deliveryTypeService.addDeliveryType(deliveryTypeDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/{typeName}")
-    public DeliveryTypeDto updateDeliveryType(@PathVariable String typeName, @RequestBody DeliveryTypeDto deliveryTypeDto) {
+    public DeliveryTypeDto updateDeliveryType(@PathVariable String typeName, @RequestBody @Validated(OnUpdate.class) DeliveryTypeDto deliveryTypeDto) {
         log.info("[Controller] updateDeliveryType by name {} ", typeName);
         return deliveryTypeService.updateDeliveryType(typeName, deliveryTypeDto);
     }

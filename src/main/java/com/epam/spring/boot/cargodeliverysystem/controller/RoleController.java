@@ -1,10 +1,13 @@
 package com.epam.spring.boot.cargodeliverysystem.controller;
 
 import com.epam.spring.boot.cargodeliverysystem.dto.RoleDto;
+import com.epam.spring.boot.cargodeliverysystem.dto.group.OnCreate;
+import com.epam.spring.boot.cargodeliverysystem.dto.group.OnUpdate;
 import com.epam.spring.boot.cargodeliverysystem.service.RoleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -24,14 +27,14 @@ public class RoleController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public RoleDto addRole(@RequestBody RoleDto roleDto) {
+    public RoleDto addRole(@RequestBody @Validated(OnCreate.class) RoleDto roleDto) {
         log.info("[Controller] addRole by name {} ", roleDto);
         return roleService.addRole(roleDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/{roleName}")
-    public RoleDto updateRole(@PathVariable String roleName, @RequestBody RoleDto roleDto) {
+    public RoleDto updateRole(@PathVariable String roleName, @RequestBody @Validated(OnUpdate.class) RoleDto roleDto) {
         log.info("[Controller] updateRole by name {} ", roleName);
         return roleService.updateRole(roleName, roleDto);
     }

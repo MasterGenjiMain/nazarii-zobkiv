@@ -57,6 +57,10 @@ public class TariffServiceImpl implements TariffService {
     public TariffDto updateTariff(String tariffName, TariffDto tariffDto) {
         log.info("updateTariff with name {}", tariffName);
         Tariff tariff = tariffMapper.mapTariffDtoToTariff(tariffDto);
+
+        Tariff oldTariff = tariffRepository.getTariffByName(tariffName);
+        tariff.setId(oldTariff.getId());
+
         tariff = tariffRepository.updateTariff(tariffName, tariff);
         return tariffMapper.mapTariffToTariffDto(tariff);
     }
