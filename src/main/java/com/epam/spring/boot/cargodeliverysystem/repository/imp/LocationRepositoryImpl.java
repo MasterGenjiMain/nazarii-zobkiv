@@ -1,5 +1,6 @@
 package com.epam.spring.boot.cargodeliverysystem.repository.imp;
 
+import com.epam.spring.boot.cargodeliverysystem.exception.EntityNotFoundException;
 import com.epam.spring.boot.cargodeliverysystem.model.Location;
 import com.epam.spring.boot.cargodeliverysystem.repository.LocationRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +26,7 @@ public class LocationRepositoryImpl implements LocationRepository {
         return locationList.stream()
                 .filter(l -> l.getLocationName().equals(locationName))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Location is not found!"));
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
@@ -42,7 +43,7 @@ public class LocationRepositoryImpl implements LocationRepository {
         if(isDeleted) {
             locationList.add(location);
         } else {
-            throw new RuntimeException("Location is not found!");
+            throw new EntityNotFoundException();
         }
         return location;
     }

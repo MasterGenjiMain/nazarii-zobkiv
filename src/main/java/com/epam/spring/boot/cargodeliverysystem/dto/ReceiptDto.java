@@ -15,7 +15,6 @@ import javax.validation.constraints.Null;
 @JsonInclude(Include.NON_NULL)
 public class ReceiptDto {
 
-    @Null(message = "'id' should be absent in request", groups = OnUpdate.class)
     @NotNull(message = "'id' shouldn't be empty", groups = OnCreate.class)
     private long id;
 

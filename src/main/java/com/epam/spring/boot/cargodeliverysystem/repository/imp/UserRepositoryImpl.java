@@ -1,5 +1,6 @@
 package com.epam.spring.boot.cargodeliverysystem.repository.imp;
 
+import com.epam.spring.boot.cargodeliverysystem.exception.EntityNotFoundException;
 import com.epam.spring.boot.cargodeliverysystem.model.User;
 import com.epam.spring.boot.cargodeliverysystem.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,7 @@ public class UserRepositoryImpl implements UserRepository {
         return userList.stream()
                 .filter(u -> u.getUsername().equals(username))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("User is not found!"));
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
@@ -37,7 +38,7 @@ public class UserRepositoryImpl implements UserRepository {
         if(isDeleted) {
             userList.add(user);
         } else {
-            throw new RuntimeException("User is not found!");
+            throw new EntityNotFoundException();
         }
         return user;
     }

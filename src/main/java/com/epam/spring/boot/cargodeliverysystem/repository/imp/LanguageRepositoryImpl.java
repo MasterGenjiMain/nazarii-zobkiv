@@ -1,5 +1,6 @@
 package com.epam.spring.boot.cargodeliverysystem.repository.imp;
 
+import com.epam.spring.boot.cargodeliverysystem.exception.EntityNotFoundException;
 import com.epam.spring.boot.cargodeliverysystem.model.Language;
 import com.epam.spring.boot.cargodeliverysystem.repository.LanguageRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,7 @@ public class LanguageRepositoryImpl implements LanguageRepository {
         return languageList.stream()
                 .filter(lang -> lang.getLanguageName().equals(languageName))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Language is not found!"));
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
@@ -37,7 +38,7 @@ public class LanguageRepositoryImpl implements LanguageRepository {
         if(isDeleted) {
             languageList.add(language);
         } else {
-            throw new RuntimeException("Language is not found!");
+            throw new EntityNotFoundException();
         }
         return language;
     }

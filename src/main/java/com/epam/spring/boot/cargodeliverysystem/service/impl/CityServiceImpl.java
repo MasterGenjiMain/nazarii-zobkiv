@@ -36,10 +36,6 @@ public class CityServiceImpl implements CityService {
     public CityDto updateCity(String name, CityDto cityDto) {
         log.info("updateUser with name {}", name);
         City city = cityMapper.mapCityDtoToCity(cityDto);
-
-        City oldCity = cityRepository.getCity(name);
-        city.setId(oldCity.getId());
-
         city = cityRepository.updateCity(name, city);
         return cityMapper.mapCityToCityDto(city);
     }

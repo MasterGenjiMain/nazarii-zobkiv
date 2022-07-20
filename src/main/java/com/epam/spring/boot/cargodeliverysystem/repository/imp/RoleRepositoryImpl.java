@@ -1,5 +1,6 @@
 package com.epam.spring.boot.cargodeliverysystem.repository.imp;
 
+import com.epam.spring.boot.cargodeliverysystem.exception.EntityNotFoundException;
 import com.epam.spring.boot.cargodeliverysystem.model.Role;
 import com.epam.spring.boot.cargodeliverysystem.repository.RoleRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,7 @@ public class RoleRepositoryImpl implements RoleRepository {
         return roleList.stream()
                 .filter(r -> r.getRoleName().equals(roleName))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Role is not found!"));
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
@@ -37,7 +38,7 @@ public class RoleRepositoryImpl implements RoleRepository {
         if(isDeleted) {
             roleList.add(role);
         } else {
-            throw new RuntimeException("Role is not found!");
+            throw new EntityNotFoundException();
         }
         return role;
     }

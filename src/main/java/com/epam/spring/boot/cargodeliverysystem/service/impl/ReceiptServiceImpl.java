@@ -49,7 +49,6 @@ public class ReceiptServiceImpl implements ReceiptService {
         Receipt receipt = receiptMapper.mapReceiptDtoToReceipt(receiptDto);
 
         Receipt oldReceipt = receiptRepository.getReceipt(id);
-        receipt.setId(oldReceipt.getId());
         receipt.setUserId(oldReceipt.getUserId());
         receipt.setDeliveryOrderId(oldReceipt.getDeliveryOrderId());
 

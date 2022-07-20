@@ -48,10 +48,6 @@ public class LocationServiceImpl implements LocationService {
     public LocationDto updateLocation(String locationName, LocationDto locationDto) {
         log.info("updateLocation with name {}", locationName);
         Location location = locationMapper.mapLocationDtoToLocation(locationDto);
-
-        Location oldLocation = locationRepository.getLocation(locationName);
-        location.setId(oldLocation.getId());
-
         location = locationRepository.updateLocation(locationName, location);
         return locationMapper.mapLocationToLocationDto(location);
     }

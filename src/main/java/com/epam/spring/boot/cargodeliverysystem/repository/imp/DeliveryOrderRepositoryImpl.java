@@ -1,5 +1,6 @@
 package com.epam.spring.boot.cargodeliverysystem.repository.imp;
 
+import com.epam.spring.boot.cargodeliverysystem.exception.EntityNotFoundException;
 import com.epam.spring.boot.cargodeliverysystem.model.DeliveryOrder;
 import com.epam.spring.boot.cargodeliverysystem.repository.DeliveryOrderRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,7 @@ public class DeliveryOrderRepositoryImpl implements DeliveryOrderRepository {
         return deliveryOrderList.stream()
                 .filter(ord -> ord.getId() == id)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Delivery Order is not found!"));
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class DeliveryOrderRepositoryImpl implements DeliveryOrderRepository {
         if(isDeleted) {
             deliveryOrderList.add(deliveryOrder);
         } else {
-            throw new RuntimeException("Delivery Order is not found!");
+            throw new EntityNotFoundException();
         }
         return deliveryOrder;
     }

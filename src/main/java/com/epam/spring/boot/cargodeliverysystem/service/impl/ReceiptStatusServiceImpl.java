@@ -36,10 +36,6 @@ public class ReceiptStatusServiceImpl implements ReceiptStatusService {
     public ReceiptStatusDto updateReceiptStatus(String statusName, ReceiptStatusDto receiptStatusDto) {
         log.info("updateReceiptStatus with name {}", statusName);
         ReceiptStatus receiptStatus = receiptStatusMapper.mapReceiptStatusDtoToReceiptStatus(receiptStatusDto);
-
-        ReceiptStatus oldReceiptStatus = receiptStatusRepository.getReceiptStatus(statusName);
-        receiptStatus.setId(oldReceiptStatus.getId());
-
         receiptStatus = receiptStatusRepository.updateReceiptStatus(statusName, receiptStatus);
         return receiptStatusMapper.mapReceiptStatusToReceiptStatusDto(receiptStatus);
     }

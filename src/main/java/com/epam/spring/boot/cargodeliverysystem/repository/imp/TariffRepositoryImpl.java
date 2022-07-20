@@ -1,5 +1,6 @@
 package com.epam.spring.boot.cargodeliverysystem.repository.imp;
 
+import com.epam.spring.boot.cargodeliverysystem.exception.EntityNotFoundException;
 import com.epam.spring.boot.cargodeliverysystem.model.Tariff;
 import com.epam.spring.boot.cargodeliverysystem.repository.TariffRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,7 @@ public class TariffRepositoryImpl implements TariffRepository {
         return tariffList.stream()
                 .filter(t -> t.getTariffName().equals(tariffName))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Tariff is not found!"));
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
@@ -51,7 +52,7 @@ public class TariffRepositoryImpl implements TariffRepository {
         if(isDeleted) {
             tariffList.add(tariff);
         } else {
-            throw new RuntimeException("Tariff is not found!");
+            throw new EntityNotFoundException();
         }
         return tariff;
     }

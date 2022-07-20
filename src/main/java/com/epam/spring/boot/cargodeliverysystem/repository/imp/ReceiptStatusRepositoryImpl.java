@@ -1,5 +1,6 @@
 package com.epam.spring.boot.cargodeliverysystem.repository.imp;
 
+import com.epam.spring.boot.cargodeliverysystem.exception.EntityNotFoundException;
 import com.epam.spring.boot.cargodeliverysystem.model.ReceiptStatus;
 import com.epam.spring.boot.cargodeliverysystem.repository.ReceiptStatusRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,7 @@ public class ReceiptStatusRepositoryImpl implements ReceiptStatusRepository {
         return receiptStatusList.stream()
                 .filter(s -> s.getStatusName().equals(statusName))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Receipt Status is not found!"));
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
@@ -37,7 +38,7 @@ public class ReceiptStatusRepositoryImpl implements ReceiptStatusRepository {
         if(isDeleted) {
             receiptStatusList.add(receiptStatus);
         } else {
-            throw new RuntimeException("Receipt Status is not found!");
+            throw new EntityNotFoundException();
         }
         return receiptStatus;
     }

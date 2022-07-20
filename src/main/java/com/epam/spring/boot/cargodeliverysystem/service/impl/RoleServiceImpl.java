@@ -36,10 +36,6 @@ public class RoleServiceImpl implements RoleService {
     public RoleDto updateRole(String roleName, RoleDto roleDto) {
         log.info("updateRole with name {}", roleName);
         Role role = roleMapper.mapRoleDtoToRole(roleDto);
-
-        Role oldRole = roleRepository.getRole(roleName);
-        role.setId(oldRole.getId());
-
         role = roleRepository.updateRole(roleName, role);
         return roleMapper.mapRoleToRoleDto(role);
     }

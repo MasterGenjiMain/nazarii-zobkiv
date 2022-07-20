@@ -36,10 +36,6 @@ public class LanguageServiceImpl implements LanguageService {
     public LanguageDto updateLanguage(String languageName, LanguageDto languageDto) {
         log.info("updateLanguage with name {}", languageName);
         Language language = languageMapper.mapLanguageDtoToLanguage(languageDto);
-
-        Language oldLanguage = languageRepository.getLanguage(languageName);
-        language.setId(oldLanguage.getId());
-
         language = languageRepository.updateLanguage(languageName, language);
         return languageMapper.mapLanguageToLanguageDto(language);
     }

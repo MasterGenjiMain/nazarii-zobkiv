@@ -1,5 +1,6 @@
 package com.epam.spring.boot.cargodeliverysystem.repository.imp;
 
+import com.epam.spring.boot.cargodeliverysystem.exception.EntityNotFoundException;
 import com.epam.spring.boot.cargodeliverysystem.model.City;
 import com.epam.spring.boot.cargodeliverysystem.repository.CityRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,7 @@ public class CityRepositoryImpl implements CityRepository {
         return cityList.stream()
                 .filter(city -> city.getCityName().equals(name))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("City is not found!"));
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
@@ -37,7 +38,7 @@ public class CityRepositoryImpl implements CityRepository {
         if(isDeleted) {
             cityList.add(city);
         } else {
-            throw new RuntimeException("City is not found!");
+            throw new EntityNotFoundException();
         }
         return city;
     }
