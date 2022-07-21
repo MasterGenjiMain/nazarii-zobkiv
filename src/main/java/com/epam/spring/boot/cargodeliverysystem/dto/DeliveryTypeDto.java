@@ -14,7 +14,6 @@ import javax.validation.constraints.NotNull;
 @JsonInclude(Include.NON_NULL)
 public class DeliveryTypeDto {
 
-    @NotNull(message = "'id' shouldn't be empty", groups = OnCreate.class)
     private long id;
 
     @NotBlank(message = "'typeName' shouldn't be empty", groups = OnCreate.class)

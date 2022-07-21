@@ -7,14 +7,12 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
 @JsonInclude(Include.NON_NULL)
 public class RoleDto {
 
-    @NotNull(message = "'id' shouldn't be empty", groups = OnCreate.class)
     private long id;
 
     @NotBlank(message = "'roleName' shouldn't be empty", groups = OnCreate.class)

@@ -18,7 +18,6 @@ import java.util.Date;
 @JsonInclude(Include.NON_NULL)
 public class UserDto {
 
-    @NotNull(message = "'id' shouldn't be empty", groups = OnCreate.class)
     private long id;
 
     @NotBlank(message = "'username' shouldn't be empty", groups = OnCreate.class)
