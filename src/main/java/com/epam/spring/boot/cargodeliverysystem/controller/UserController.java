@@ -1,6 +1,5 @@
 package com.epam.spring.boot.cargodeliverysystem.controller;
 
-import com.epam.spring.boot.cargodeliverysystem.api.UserApi;
 import com.epam.spring.boot.cargodeliverysystem.dto.UserDto;
 import com.epam.spring.boot.cargodeliverysystem.dto.group.OnCreate;
 import com.epam.spring.boot.cargodeliverysystem.dto.group.OnUpdate;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
-public class UserController implements UserApi {
+public class UserController {
 
     private final UserService userService;
 
