@@ -1,5 +1,6 @@
 package com.epam.spring.boot.cargodeliverysystem.dto;
 
+import com.epam.spring.boot.cargodeliverysystem.customvalidator.annotation.PasswordConstraint;
 import com.epam.spring.boot.cargodeliverysystem.dto.group.OnCreate;
 import com.epam.spring.boot.cargodeliverysystem.dto.group.OnUpdate;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -28,12 +29,12 @@ public class UserDto {
     @NotBlank(message = "'email' shouldn't be empty", groups = OnCreate.class)
     private String email;
 
-    @Null(message = "'password' should be absent in request", groups = OnUpdate.class)
     @NotBlank(message = "'password' shouldn't be empty", groups = OnCreate.class)
+    @PasswordConstraint
     private String password;
 
-    @Null(message = "'repeatPassword' should be absent in request", groups = OnUpdate.class)
     @NotBlank(message = "'repeatPassword' shouldn't be empty", groups = OnCreate.class)
+    @PasswordConstraint
     private String repeatPassword;
 
     @NotNull(message = "'createTime' shouldn't be empty", groups = OnCreate.class)
