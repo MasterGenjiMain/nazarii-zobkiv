@@ -1,18 +1,13 @@
 package com.epam.spring.boot.cargodeliverysystem.repository;
 
 import com.epam.spring.boot.cargodeliverysystem.model.Receipt;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface ReceiptRepository {
+@Repository
+public interface ReceiptRepository extends JpaRepository<Receipt, Long> {
 
-    List<Receipt> getAllReceipts();
-
-    Receipt getReceipt(long id);
-
-    Receipt createReceipt(Receipt receipt);
-
-    Receipt updateReceipt(long id, Receipt receipt);
-
-    boolean deleteReceipt (long id);
+    List<Receipt> findAllByUserId(Long id);
 }

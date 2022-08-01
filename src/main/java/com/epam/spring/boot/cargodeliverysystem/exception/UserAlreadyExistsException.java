@@ -2,11 +2,11 @@ package com.epam.spring.boot.cargodeliverysystem.exception;
 
 import com.epam.spring.boot.cargodeliverysystem.model.enums.ErrorType;
 
-public class EntityNotFoundException extends ServiceException {
+public class UserAlreadyExistsException extends ServiceException{
 
-    private static final String DEFAULT_MESSAGE = "Entity not found";
+    private static final String DEFAULT_MESSAGE = "Email already registered";
 
-    public EntityNotFoundException() {
+    public UserAlreadyExistsException() {
         super(DEFAULT_MESSAGE);
     }
 

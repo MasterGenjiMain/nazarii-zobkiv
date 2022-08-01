@@ -1,20 +1,16 @@
 package com.epam.spring.boot.cargodeliverysystem.repository;
 
 import com.epam.spring.boot.cargodeliverysystem.model.DeliveryType;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface DeliveryTypeRepository {
+@Repository
+public interface DeliveryTypeRepository extends JpaRepository<DeliveryType, Long> {
 
-    List<DeliveryType> getAllDeliveryTypes();
+    Optional<DeliveryType> findByTypeName(String typeName);
 
-    DeliveryType getDeliveryTypeByName(String typeName);
-
-    List<DeliveryType> getDeliveryTypesByLanguageId(long id);
-
-    DeliveryType addDeliveryType(DeliveryType deliveryType);
-
-    DeliveryType updateDeliveryType(String typeName, DeliveryType deliveryType);
-
-    boolean deleteDeliveryType(String typeName);
+    List<DeliveryType> findAllByLanguage_Id(Long id);
 }

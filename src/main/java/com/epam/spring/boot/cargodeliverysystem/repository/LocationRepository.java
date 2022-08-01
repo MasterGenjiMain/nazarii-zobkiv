@@ -1,18 +1,13 @@
 package com.epam.spring.boot.cargodeliverysystem.repository;
 
 import com.epam.spring.boot.cargodeliverysystem.model.Location;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
-public interface LocationRepository {
+@Repository
+public interface LocationRepository extends JpaRepository<Location, Long> {
 
-    List<Location> getAllLocations();
-
-    Location getLocation(String locationName);
-
-    Location addLocation(Location location);
-
-    Location updateLocation(String locationName, Location location);
-
-    boolean deleteLocation(String locationName);
+    Optional<Location> findByLocationName(String locationName);
 }

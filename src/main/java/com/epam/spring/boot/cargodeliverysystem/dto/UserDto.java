@@ -40,7 +40,7 @@ public class UserDto {
     @NotNull(message = "'createTime' shouldn't be empty", groups = OnCreate.class)
     private Date createTime;
 
-    @NotNull(message = "'roleId' shouldn't be empty", groups = OnCreate.class)
-    private long roleId;
+//    @NotNull(message = "'roleId' shouldn't be empty", groups = OnCreate.class)
+    private RoleDto roleId;
 
 }

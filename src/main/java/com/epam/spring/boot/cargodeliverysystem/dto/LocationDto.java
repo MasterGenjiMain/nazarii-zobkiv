@@ -20,9 +20,9 @@ public class LocationDto {
     private String locationName;
 
     @NotNull(message = "'cityId' shouldn't be empty", groups = OnCreate.class)
-    private long cityId;
+    private CityDto cityId;
 
     @NotNull(message = "'activeStatusId' shouldn't be empty", groups = OnCreate.class)
-    private int activeStatusId;
+    private ActiveStatusDto activeStatusId;
 
 }

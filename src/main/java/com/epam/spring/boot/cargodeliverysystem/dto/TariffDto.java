@@ -26,6 +26,6 @@ public class TariffDto {
     private String tariffInfo;
 
     @NotNull(message = "'languageId' shouldn't be empty", groups = OnCreate.class)
-    private long languageId;
+    private LanguageDto languageId;
 
 }

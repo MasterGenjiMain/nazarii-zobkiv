@@ -10,7 +10,23 @@ management:
     health:
       show-details: always
 
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/cargo_delivery_db
+    username: root
+    password: 380982605721NaZob
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
 info:
   application:
     author: Nazarii Zobkiv
     description: Cargo Management System (CDS)
+
+logging:
+  level:
+    org.springframework.orm.jpa: DEBUG
+    org.springframework.transaction: DEBUG

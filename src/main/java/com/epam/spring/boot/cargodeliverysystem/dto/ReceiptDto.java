@@ -16,18 +16,18 @@ public class ReceiptDto {
     private long id;
 
     @NotNull(message = "'userId' shouldn't be empty", groups = OnCreate.class)
-    private long userId;
+    private UserDto userId;
 
     @NotNull(message = "'managerId' shouldn't be empty", groups = OnCreate.class)
-    private long managerId;
+    private UserDto managerId;
 
     @NotNull(message = "'price' shouldn't be empty", groups = OnCreate.class)
     private double price;
 
     @NotNull(message = "'receiptStatusId' shouldn't be empty", groups = OnCreate.class)
-    private long receiptStatusId;
+    private ReceiptStatusDto receiptStatusId;
 
     @NotNull(message = "'deliveryOrderId' shouldn't be empty", groups = OnCreate.class)
-    private long deliveryOrderId;
+    private DeliveryOrderDto deliveryOrderId;
 
 }

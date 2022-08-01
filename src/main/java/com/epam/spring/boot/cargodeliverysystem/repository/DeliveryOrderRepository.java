@@ -1,18 +1,9 @@
 package com.epam.spring.boot.cargodeliverysystem.repository;
 
 import com.epam.spring.boot.cargodeliverysystem.model.DeliveryOrder;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface DeliveryOrderRepository {
-
-    List<DeliveryOrder> getAllDeliveryOrders();
-
-    DeliveryOrder getDeliveryOrder(long id);
-
-    DeliveryOrder createDeliveryOrder(DeliveryOrder deliveryOrder);
-
-    DeliveryOrder updateDeliveryOrder(long id, DeliveryOrder deliveryOrder);
-
-    boolean deleteDeliveryOrder(long id);
+@Repository
+public interface DeliveryOrderRepository extends JpaRepository<DeliveryOrder, Long> {
 }

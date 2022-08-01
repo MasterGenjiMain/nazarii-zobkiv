@@ -8,24 +8,17 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tariff")
+@Table(name = "active_status")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Tariff {
+public class ActiveStatus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long Id;
 
     @Column(nullable = false, unique = true)
-    private String tariffName;
-    @Column(nullable = false)
-    private double tariffPrice;
-    private String tariffInfo;
-
-    @ManyToOne
-    @JoinColumn(name = "language_id", referencedColumnName = "id")
-    private Language language;    //relation
+    private String activeStatusName;
 }

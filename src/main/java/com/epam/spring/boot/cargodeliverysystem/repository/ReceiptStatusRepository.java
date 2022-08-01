@@ -1,14 +1,13 @@
 package com.epam.spring.boot.cargodeliverysystem.repository;
 
 import com.epam.spring.boot.cargodeliverysystem.model.ReceiptStatus;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ReceiptStatusRepository {
+import java.util.Optional;
 
-    ReceiptStatus getReceiptStatus(String statusName);
+@Repository
+public interface ReceiptStatusRepository extends JpaRepository<ReceiptStatus, Long> {
 
-    ReceiptStatus addReceiptStatus(ReceiptStatus receiptStatus);
-
-    ReceiptStatus updateReceiptStatus(String statusName, ReceiptStatus receiptStatus);
-
-    boolean deleteReceiptStatus(String statusName);
+    Optional<ReceiptStatus> findByStatusName(String statusName);
 }

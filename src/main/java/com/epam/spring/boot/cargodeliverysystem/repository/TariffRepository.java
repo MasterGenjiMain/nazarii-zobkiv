@@ -1,20 +1,16 @@
 package com.epam.spring.boot.cargodeliverysystem.repository;
 
 import com.epam.spring.boot.cargodeliverysystem.model.Tariff;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface TariffRepository {
+@Repository
+public interface TariffRepository extends JpaRepository<Tariff, Long> {
 
-    List<Tariff> getAllTariffs();
+    Optional<Tariff> findByTariffName(String tariffName);
 
-    Tariff getTariffByName(String tariffName);
-
-    List<Tariff> getTariffsByLanguageId(long id);
-
-    Tariff addTariff(Tariff tariff);
-
-    Tariff updateTariff(String tariffName, Tariff tariff);
-
-    boolean deleteTariff(String tariffName);
+    List<Tariff> findAllByLanguage_Id(Long id);
 }

@@ -7,19 +7,14 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
 @JsonInclude(Include.NON_NULL)
-public class DeliveryTypeDto {
+public class ActiveStatusDto {
 
     private long id;
 
-    @NotBlank(message = "'typeName' shouldn't be empty", groups = OnCreate.class)
-    private String typeName;
-
-    @NotNull(message = "'languageId' shouldn't be empty", groups = OnCreate.class)
-    private LanguageDto languageId;
-
+    @NotBlank(message = "'id' shouldn't be empty", groups = OnCreate.class)
+    private String activeStatusName;
 }

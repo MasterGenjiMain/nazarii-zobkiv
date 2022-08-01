@@ -1,14 +1,13 @@
 package com.epam.spring.boot.cargodeliverysystem.repository;
 
 import com.epam.spring.boot.cargodeliverysystem.model.Language;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface LanguageRepository {
+import java.util.Optional;
 
-    Language getLanguage(String languageName);
+@Repository
+public interface LanguageRepository extends JpaRepository<Language, Long> {
 
-    Language addLanguage(Language language);
-
-    Language updateLanguage(String languageName, Language language);
-
-    boolean deleteDeliveryOrder(String languageName);
+    Optional<Language> findByLanguageName(String languageName);
 }

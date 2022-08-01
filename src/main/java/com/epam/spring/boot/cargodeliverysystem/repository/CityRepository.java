@@ -1,14 +1,15 @@
 package com.epam.spring.boot.cargodeliverysystem.repository;
 
 import com.epam.spring.boot.cargodeliverysystem.model.City;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CityRepository {
+import java.util.Optional;
 
-    City getCity(String name);
+@Repository
+public interface CityRepository extends JpaRepository<City, Long> {
 
-    City addCity(City city);
+    Optional<City> findByCityName(String cityName);
 
-    City updateCity(String name, City city);
-
-    boolean deleteCity(String name);
+    boolean deleteByCityName(String cityName);
 }

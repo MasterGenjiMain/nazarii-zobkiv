@@ -18,10 +18,10 @@ public class DeliveryOrderDto {
     private long id;
 
     @NotNull(message = "'locationFromId' shouldn't be empty", groups = OnCreate.class)
-    private long locationFromId;
+    private LocationDto locationFromId;
 
     @NotNull(message = "'locationToId' shouldn't be empty", groups = OnCreate.class)
-    private long locationToId;
+    private LocationDto locationToId;
 
     @NotBlank(message = "'cargoName' shouldn't be empty", groups = OnCreate.class)
     private String cargoName;
@@ -32,7 +32,7 @@ public class DeliveryOrderDto {
     private String address;
 
     @NotNull(message = "'deliveryTypeId' shouldn't be empty", groups = OnCreate.class)
-    private long deliveryTypeId;
+    private DeliveryTypeDto deliveryTypeId;
 
     @NotNull(message = "'weight' shouldn't be empty", groups = OnCreate.class)
     private double weight;
@@ -43,6 +43,6 @@ public class DeliveryOrderDto {
     private Timestamp receivingDate;
 
     @NotNull(message = "'tariffId' shouldn't be empty", groups = OnCreate.class)
-    private long tariffId;
+    private TariffDto tariffId;
 
 }
