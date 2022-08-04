@@ -6,8 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.sql.Timestamp;
 
 @Data
@@ -17,11 +16,11 @@ public class DeliveryOrderDto {
 
     private long id;
 
-    @NotNull(message = "'locationFromId' shouldn't be empty", groups = OnCreate.class)
-    private LocationDto locationFromId;
+    @NotNull(message = "'locationFrom' shouldn't be empty", groups = OnCreate.class)
+    private LocationDto locationFrom;
 
-    @NotNull(message = "'locationToId' shouldn't be empty", groups = OnCreate.class)
-    private LocationDto locationToId;
+    @NotNull(message = "'locationTo' shouldn't be empty", groups = OnCreate.class)
+    private LocationDto locationTo;
 
     @NotBlank(message = "'cargoName' shouldn't be empty", groups = OnCreate.class)
     private String cargoName;
@@ -31,18 +30,24 @@ public class DeliveryOrderDto {
     @NotBlank(message = "'address' shouldn't be empty", groups = OnCreate.class)
     private String address;
 
-    @NotNull(message = "'deliveryTypeId' shouldn't be empty", groups = OnCreate.class)
-    private DeliveryTypeDto deliveryTypeId;
+    @NotNull(message = "'deliveryType' shouldn't be empty", groups = OnCreate.class)
+    private DeliveryTypeDto deliveryType;
 
     @NotNull(message = "'weight' shouldn't be empty", groups = OnCreate.class)
+    @Positive
     private double weight;
 
     @NotNull(message = "'volume' shouldn't be empty", groups = OnCreate.class)
+    @Positive
     private double volume;
 
     private Timestamp receivingDate;
 
-    @NotNull(message = "'tariffId' shouldn't be empty", groups = OnCreate.class)
-    private TariffDto tariffId;
+    @NotNull(message = "'tariff' shouldn't be empty", groups = OnCreate.class)
+    private TariffDto tariff;
+
+    @NotNull(message = "'distance' shouldn't be empty", groups = OnCreate.class)
+    @Positive
+    private double distance;
 
 }

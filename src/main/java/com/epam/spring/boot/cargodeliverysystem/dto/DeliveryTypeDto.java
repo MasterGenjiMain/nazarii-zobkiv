@@ -19,7 +19,7 @@ public class DeliveryTypeDto {
     @NotBlank(message = "'typeName' shouldn't be empty", groups = OnCreate.class)
     private String typeName;
 
-    @NotNull(message = "'languageId' shouldn't be empty", groups = OnCreate.class)
-    private LanguageDto languageId;
+    @NotNull(message = "'language' shouldn't be empty", groups = OnCreate.class)
+    private LanguageDto language;
 
 }

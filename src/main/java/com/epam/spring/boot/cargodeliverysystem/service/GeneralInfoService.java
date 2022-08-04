@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface GeneralInfoService {
 
-    List<TariffDto> getInfoForTariffsTable();
+    List<TariffDto> getInfoForTariffTableWithName(String languageName);
 
-    List<LocationDto> getInfoForLocationsTable();
+    List<LocationDto> getInfoForLocationTable();
 }

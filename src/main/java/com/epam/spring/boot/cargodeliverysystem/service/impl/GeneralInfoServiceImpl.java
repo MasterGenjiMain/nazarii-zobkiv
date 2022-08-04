@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,16 +26,16 @@ public class GeneralInfoServiceImpl implements GeneralInfoService {
     private final LocationMapper locationMapper;
 
     @Override
-    public List<TariffDto> getInfoForTariffsTable() {
+    public List<TariffDto> getInfoForTariffTableWithName(String languageName) {
         log.info("[GeneralInfoServiceImpl] createTariffsTable");
-        return tariffRepository.findAll()
+        return tariffRepository.findAllByLanguage_LanguageName(languageName)
                 .stream()
                 .map(tariffMapper::mapTariffToTariffDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<LocationDto> getInfoForLocationsTable() {
+    public List<LocationDto> getInfoForLocationTable() {
         log.info("[GeneralInfoServiceImpl] createLocationTable");
         return locationRepository.findAll()
                 .stream()

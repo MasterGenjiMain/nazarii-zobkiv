@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,7 @@ public class DeliveryOrderReportServiceImpl implements DeliveryOrderReportServic
     private final DeliveryOrderMapper deliveryOrderMapper;
 
     @Override
-    public List<DeliveryOrderDto> showAllDeliveryOrders() {
+    public List<DeliveryOrderDto> giveAllDeliveryOrders() {
         log.info("[DeliveryOrderReportServiceImpl] showAllDeliveryOrders");
         return deliveryOrderRepository.findAll()
                 .stream()

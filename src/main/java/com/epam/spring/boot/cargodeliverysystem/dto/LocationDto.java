@@ -19,10 +19,10 @@ public class LocationDto {
     @NotBlank(message = "'locationName' shouldn't be empty", groups = OnCreate.class)
     private String locationName;
 
-    @NotNull(message = "'cityId' shouldn't be empty", groups = OnCreate.class)
-    private CityDto cityId;
+    @NotNull(message = "'city' shouldn't be empty", groups = OnCreate.class)
+    private CityDto city;
 
-    @NotNull(message = "'activeStatusId' shouldn't be empty", groups = OnCreate.class)
-    private ActiveStatusDto activeStatusId;
+    @NotNull(message = "'activeStatus' shouldn't be empty", groups = OnCreate.class)
+    private ActiveStatusDto activeStatus;
 
 }

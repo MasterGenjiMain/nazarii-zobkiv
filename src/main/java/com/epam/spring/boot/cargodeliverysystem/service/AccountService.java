@@ -9,5 +9,7 @@ public interface AccountService {
 
     List<ReceiptDto> giveAllUserReceipts(Long userId);
 
-    ReceiptDto changeReceiptStatus(Long receiptId, ReceiptStatusDto receiptStatusDto);
+    ReceiptDto pay(Long receiptId);
+
+    ReceiptDto cansel(Long receiptId);
 }

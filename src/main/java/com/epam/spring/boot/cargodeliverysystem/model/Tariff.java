@@ -1,15 +1,16 @@
 package com.epam.spring.boot.cargodeliverysystem.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tariff")
-@Data
+@Getter
+@Setter
+@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,5 +28,18 @@ public class Tariff {
 
     @ManyToOne
     @JoinColumn(name = "language_id", referencedColumnName = "id")
-    private Language language;    //relation
+    private Language language;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Tariff tariff = (Tariff) o;
+        return id != null && Objects.equals(id, tariff.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.security.NoSuchAlgorithmException;
 
 @Slf4j
@@ -25,9 +26,10 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final UserMapper userMapper;
 
     @Override
+    @Transactional
     public UserDto registerUser(UserDto userDto) {
         log.info("[RegistrationServiceImpl] userRegistration with email {}", userDto.getEmail());
-        if (userRepository.existsByEmail(userDto.getEmail())) {
+        if (userRepository.existsByEmail(userDto.getEmail()) || userRepository.existsByUsername(userDto.getUsername())) {
             throw new UserAlreadyExistsException();
         }
 

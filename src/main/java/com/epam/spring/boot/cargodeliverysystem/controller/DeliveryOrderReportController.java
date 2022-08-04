@@ -24,7 +24,7 @@ public class DeliveryOrderReportController {
     @GetMapping
     public List<DeliveryOrderDto> getAllDeliveryOrders() {
         log.info("[DeliveryOrderReportController] getAllDeliveryOrders");
-        return deliveryOrderReportService.showAllDeliveryOrders();
+        return deliveryOrderReportService.giveAllDeliveryOrders();
     }
 
 }

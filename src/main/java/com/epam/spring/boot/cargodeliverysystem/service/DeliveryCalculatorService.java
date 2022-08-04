@@ -1,7 +1,8 @@
 package com.epam.spring.boot.cargodeliverysystem.service;
 
+import com.epam.spring.boot.cargodeliverysystem.dto.ReceiptDto;
+
 public interface DeliveryCalculatorService {
 
-    double calculate(int height, int width, int length,
-                 double distance, double weight, String tariffName);
+    ReceiptDto calculate(ReceiptDto receiptDto);
 }

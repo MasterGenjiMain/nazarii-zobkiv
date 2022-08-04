@@ -1,16 +1,17 @@
 package com.epam.spring.boot.cargodeliverysystem.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 @Table(name = "delivery_order")
-@Data
+@Getter
+@Setter
+@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,10 +23,10 @@ public class DeliveryOrder {
 
     @ManyToOne
     @JoinColumn(name = "location_from_id", referencedColumnName = "id")
-    private Location locationFrom;         //Relation
+    private Location locationFrom;
     @ManyToOne
     @JoinColumn(name = "location_to_id", referencedColumnName = "id")
-    private Location locationTo;           //Relation
+    private Location locationTo;
 
     @Column(nullable = false)
     private String cargoName;
@@ -35,7 +36,7 @@ public class DeliveryOrder {
 
     @ManyToOne
     @JoinColumn(name = "delivery_type_id", referencedColumnName = "id")
-    private DeliveryType deliveryType;        //Relation
+    private DeliveryType deliveryType;
 
     @Column(nullable = false)
     private double weight;
@@ -45,5 +46,18 @@ public class DeliveryOrder {
 
     @ManyToOne
     @JoinColumn(name = "tariff_id", referencedColumnName = "id")
-    private Tariff tariff;              //Relation
+    private Tariff tariff;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        DeliveryOrder that = (DeliveryOrder) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

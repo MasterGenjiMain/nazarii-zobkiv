@@ -12,5 +12,5 @@ public interface DeliveryTypeRepository extends JpaRepository<DeliveryType, Long
 
     Optional<DeliveryType> findByTypeName(String typeName);
 
-    List<DeliveryType> findAllByLanguage_Id(Long id);
+    List<DeliveryType> findAllByLanguage_LanguageName(String languageName);
 }

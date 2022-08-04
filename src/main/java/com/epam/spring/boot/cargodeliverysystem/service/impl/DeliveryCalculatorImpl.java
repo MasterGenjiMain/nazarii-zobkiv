@@ -1,5 +1,7 @@
 package com.epam.spring.boot.cargodeliverysystem.service.impl;
 
+import com.epam.spring.boot.cargodeliverysystem.dto.DeliveryOrderDto;
+import com.epam.spring.boot.cargodeliverysystem.dto.ReceiptDto;
 import com.epam.spring.boot.cargodeliverysystem.exception.EntityNotFoundException;
 import com.epam.spring.boot.cargodeliverysystem.model.Tariff;
 import com.epam.spring.boot.cargodeliverysystem.repository.TariffRepository;
@@ -7,6 +9,8 @@ import com.epam.spring.boot.cargodeliverysystem.service.DeliveryCalculatorServic
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 @Slf4j
 @Service
@@ -20,49 +24,48 @@ public class DeliveryCalculatorImpl implements DeliveryCalculatorService {
     private final TariffRepository tariffRepository;
 
     @Override
-    public double calculate(int height, int width, int length, double distance, double weight, String tariffName) {
+    public ReceiptDto calculate(ReceiptDto receiptDto) {
         log.info("[DeliveryCalculatorImpl] calculate");
-        double volume;
 
-        log.debug("height -> {}", height);
-        log.debug("width -> {}", width);
-        log.debug("length -> {}", length);
-        log.debug("distance -> {}", distance);
-        log.debug("weight -> {}", weight);
-        log.debug("tariffName -> {}", tariffName);
+        DeliveryOrderDto deliveryOrderDto = receiptDto.getDeliveryOrder();
 
-        volume = height * width * length;
-        log.debug("volume -> {}", volume);
+        log.debug("volume -> {}", deliveryOrderDto.getVolume());
+        log.debug("distance -> {}", deliveryOrderDto.getDistance());
+        log.debug("weight -> {}", deliveryOrderDto.getWeight());
+        log.debug("tariffName -> {}", deliveryOrderDto.getTariff().getTariffName());
 
-        return getPrice(distance, weight, volume, tariffName);
+        return getPrice(receiptDto, deliveryOrderDto);
     }
 
-    private double getPrice(double distance, double weight, double volume, String tariffName) {
+    private ReceiptDto getPrice(ReceiptDto receiptDto, DeliveryOrderDto deliveryOrderDto) {
         log.info("[DeliveryCalculatorImpl] getPrice");
         double volumePrice;
         double weightPrice;
         double price;
         double MINIMAL_PRICE;
 
-        double distanceMultiplayer = getDistanceMultiplayer(distance);
+        double distanceMultiplayer = getDistanceMultiplayer(deliveryOrderDto.getDistance());
         log.info("distanceMultiplayer -> {}", distanceMultiplayer);
 
-        volumePrice = ((volume / VOLUME_DIVIDER) * VOLUME_PRICE) * distanceMultiplayer;
-        weightPrice = (weight * WEIGHT_PRICE) * distanceMultiplayer;
+        volumePrice = ((deliveryOrderDto.getVolume() / VOLUME_DIVIDER) * VOLUME_PRICE) * distanceMultiplayer;
+        weightPrice = (deliveryOrderDto.getWeight() * WEIGHT_PRICE) * distanceMultiplayer;
         log.info("volumePrice -> {}", volumePrice);
         log.info("weightPrice -> {}", weightPrice);
 
         price = Math.max(volumePrice, weightPrice);
-        Tariff tariff = tariffRepository.findByTariffName(tariffName)
+        Tariff persistedTariff = tariffRepository
+                .findByTariffName(deliveryOrderDto.getTariff().getTariffName())
                 .orElseThrow(EntityNotFoundException::new);
-        MINIMAL_PRICE = tariff.getTariffPrice();
+        MINIMAL_PRICE = persistedTariff.getTariffPrice();
 
         log.info("before min -> {}", price);
         if (price < MINIMAL_PRICE) {
             price = MINIMAL_PRICE;
         }
+
+        receiptDto.setPrice(price);
         log.info("after min -> {}", price);
-        return price;
+        return receiptDto;
     }
 
     private double getDistanceMultiplayer(double distance) {

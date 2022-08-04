@@ -12,5 +12,5 @@ public interface TariffRepository extends JpaRepository<Tariff, Long> {
 
     Optional<Tariff> findByTariffName(String tariffName);
 
-    List<Tariff> findAllByLanguage_Id(Long id);
+    List<Tariff> findAllByLanguage_LanguageName(String name);
 }
