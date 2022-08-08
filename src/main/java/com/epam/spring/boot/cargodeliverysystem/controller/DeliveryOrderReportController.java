@@ -5,10 +5,7 @@ import com.epam.spring.boot.cargodeliverysystem.service.DeliveryOrderReportServi
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,9 +19,9 @@ public class DeliveryOrderReportController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public List<DeliveryOrderDto> getAllDeliveryOrders() {
+    public List<DeliveryOrderDto> getAllDeliveryOrders(@RequestParam(defaultValue = "0") int pageNum) {
         log.info("[DeliveryOrderReportController] getAllDeliveryOrders");
-        return deliveryOrderReportService.giveAllDeliveryOrders();
+        return deliveryOrderReportService.getAllDeliveryOrders(pageNum);
     }
 
 }

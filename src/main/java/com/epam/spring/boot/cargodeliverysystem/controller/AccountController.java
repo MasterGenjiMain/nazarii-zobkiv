@@ -19,9 +19,10 @@ public class AccountController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{id}")
-    public List<ReceiptDto> getAllUserReceipts(@PathVariable Long id){
+    public List<ReceiptDto> getAllUserReceipts(@PathVariable Long id,
+                                               @RequestParam(defaultValue = "0") int pageNum){
         log.info("[AccountController] getAllUserReceipts by id {} ", id);
-        return accountService.giveAllUserReceipts(id);
+        return accountService.getAllUserReceipts(id, pageNum);
     }
 
     @ResponseStatus(HttpStatus.OK)

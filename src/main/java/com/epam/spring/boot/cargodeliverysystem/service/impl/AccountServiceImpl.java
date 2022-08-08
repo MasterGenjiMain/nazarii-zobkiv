@@ -12,6 +12,8 @@ import com.epam.spring.boot.cargodeliverysystem.service.AccountService;
 import com.epam.spring.boot.cargodeliverysystem.service.ChangeReceiptStatusService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -33,10 +35,13 @@ public class AccountServiceImpl implements AccountService {
     private final ReceiptStatusMapper receiptStatusMapper;
 
     @Override
-    public List<ReceiptDto> giveAllUserReceipts(Long userId) {
+    public List<ReceiptDto> getAllUserReceipts(Long userId, int pageNum) {
         log.info("[AccountServiceImpl] showUserReceipts with userId {}", userId);
+
+        Pageable pageable = PageRequest.of(pageNum, 3);
+
         return receiptRepository
-                .findAllByUserId(userId)
+                .findAllByUserId(userId, pageable)
                 .stream()
                 .map(receiptMapper::mapReceiptToReceiptDto)
                 .collect(Collectors.toList());

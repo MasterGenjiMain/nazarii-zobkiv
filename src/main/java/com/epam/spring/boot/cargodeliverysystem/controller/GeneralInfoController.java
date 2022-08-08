@@ -20,16 +20,17 @@ public class GeneralInfoController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "tariffInfo/{languageName}")
-    public List<TariffDto> getTariffsInfo(@PathVariable String languageName){
+    public List<TariffDto> getTariffsInfo(@PathVariable String languageName,
+                                          @RequestParam(defaultValue = "0") int pageNum){
         log.info("[GeneralInfoController] getTariffsInfo");
-        return generalInfoService.getInfoForTariffTableWithName(languageName);
+        return generalInfoService.getInfoForTariffTableWithName(languageName, pageNum);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "locationInfo")
-    public List<LocationDto> getLocationsInfo(){
+    public List<LocationDto> getLocationsInfo(@RequestParam(defaultValue = "0") int pageNum){
         log.info("[GeneralInfoController] getLocationsInfo");
-        return generalInfoService.getInfoForLocationTable();
+        return generalInfoService.getInfoForLocationTable(pageNum);
     }
 
 }

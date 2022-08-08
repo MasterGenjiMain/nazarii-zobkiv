@@ -30,6 +30,7 @@ public class ApproveServiceImpl implements ApproveService {
     private static final Long APPROVED_STATUS = 2L;
 
     private final ReceiptRepository receiptRepository;
+    private final ReceiptMapper receiptMapper;
     private final ReceiptStatusRepository receiptStatusRepository;
     private final DeliveryOrderRepository deliveryOrderRepository;
     private final ReceiptStatusMapper receiptStatusMapper;
@@ -52,6 +53,7 @@ public class ApproveServiceImpl implements ApproveService {
             DeliveryOrder persistedDeliveryOrder = persistedReceipt.getDeliveryOrder();
             persistedDeliveryOrder.setReceivingDate(new Timestamp(System.currentTimeMillis()));
             deliveryOrderRepository.save(persistedDeliveryOrder);
+            return receiptMapper.mapReceiptToReceiptDto(persistedReceipt);
         }
         return changeReceiptStatus(receiptId, receiptStatusMapper.mapReceiptStatusToReceiptStatusDto(newReceiptStatus));
     }

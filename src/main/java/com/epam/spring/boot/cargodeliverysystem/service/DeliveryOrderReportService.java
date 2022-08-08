@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface DeliveryOrderReportService {
 
-    List<DeliveryOrderDto> giveAllDeliveryOrders();
+    List<DeliveryOrderDto> getAllDeliveryOrders(int pageNum);
 }

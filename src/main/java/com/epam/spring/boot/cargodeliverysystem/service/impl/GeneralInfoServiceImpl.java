@@ -9,9 +9,10 @@ import com.epam.spring.boot.cargodeliverysystem.repository.TariffRepository;
 import com.epam.spring.boot.cargodeliverysystem.service.GeneralInfoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,18 +27,24 @@ public class GeneralInfoServiceImpl implements GeneralInfoService {
     private final LocationMapper locationMapper;
 
     @Override
-    public List<TariffDto> getInfoForTariffTableWithName(String languageName) {
+    public List<TariffDto> getInfoForTariffTableWithName(String languageName, int pageNum) {
         log.info("[GeneralInfoServiceImpl] createTariffsTable");
-        return tariffRepository.findAllByLanguage_LanguageName(languageName)
+
+        Pageable pageable = PageRequest.of(pageNum, 3);
+
+        return tariffRepository.findAllByLanguage_LanguageName(languageName, pageable)
                 .stream()
                 .map(tariffMapper::mapTariffToTariffDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<LocationDto> getInfoForLocationTable() {
+    public List<LocationDto> getInfoForLocationTable(int pageNum) {
         log.info("[GeneralInfoServiceImpl] createLocationTable");
-        return locationRepository.findAll()
+
+        Pageable pageable = PageRequest.of(pageNum, 3);
+
+        return locationRepository.findAll(pageable)
                 .stream()
                 .map(locationMapper::mapLocationToLocationDto)
                 .collect(Collectors.toList());
