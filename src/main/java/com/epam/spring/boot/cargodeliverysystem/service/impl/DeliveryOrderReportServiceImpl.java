@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,10 +23,10 @@ public class DeliveryOrderReportServiceImpl implements DeliveryOrderReportServic
     private final DeliveryOrderMapper deliveryOrderMapper;
 
     @Override
-    public List<DeliveryOrderDto> getAllDeliveryOrders(int pageNum) {
+    public List<DeliveryOrderDto> getAllDeliveryOrders(int pageNum, String sortBy) {
         log.info("[DeliveryOrderReportServiceImpl] showAllDeliveryOrders");
 
-        Pageable pageable = PageRequest.of(pageNum, 3);
+        Pageable pageable = PageRequest.of(pageNum, 3, Sort.by(sortBy));
 
         return deliveryOrderRepository.findAll(pageable)
                 .stream()

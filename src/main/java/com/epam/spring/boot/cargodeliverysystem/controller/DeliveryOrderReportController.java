@@ -19,9 +19,10 @@ public class DeliveryOrderReportController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public List<DeliveryOrderDto> getAllDeliveryOrders(@RequestParam(defaultValue = "0") int pageNum) {
+    public List<DeliveryOrderDto> getAllDeliveryOrders(@RequestParam(defaultValue = "0") int pageNum,
+                                                       @RequestParam(required = false) String sortBy) {
         log.info("[DeliveryOrderReportController] getAllDeliveryOrders");
-        return deliveryOrderReportService.getAllDeliveryOrders(pageNum);
+        return deliveryOrderReportService.getAllDeliveryOrders(pageNum, sortBy);
     }
 
 }

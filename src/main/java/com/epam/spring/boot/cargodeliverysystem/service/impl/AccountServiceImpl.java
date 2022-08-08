@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -35,10 +36,10 @@ public class AccountServiceImpl implements AccountService {
     private final ReceiptStatusMapper receiptStatusMapper;
 
     @Override
-    public List<ReceiptDto> getAllUserReceipts(Long userId, int pageNum) {
+    public List<ReceiptDto> getAllUserReceipts(Long userId, int pageNum, String sortBy) {
         log.info("[AccountServiceImpl] showUserReceipts with userId {}", userId);
 
-        Pageable pageable = PageRequest.of(pageNum, 3);
+        Pageable pageable = PageRequest.of(pageNum, 3, Sort.by(sortBy));
 
         return receiptRepository
                 .findAllByUserId(userId, pageable)

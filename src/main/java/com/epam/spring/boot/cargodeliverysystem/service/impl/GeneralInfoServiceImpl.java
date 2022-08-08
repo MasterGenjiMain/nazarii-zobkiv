@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,10 +28,10 @@ public class GeneralInfoServiceImpl implements GeneralInfoService {
     private final LocationMapper locationMapper;
 
     @Override
-    public List<TariffDto> getInfoForTariffTableWithName(String languageName, int pageNum) {
+    public List<TariffDto> getInfoForTariffTableWithName(String languageName, int pageNum, String sortBy) {
         log.info("[GeneralInfoServiceImpl] createTariffsTable");
 
-        Pageable pageable = PageRequest.of(pageNum, 3);
+        Pageable pageable = PageRequest.of(pageNum, 3, Sort.by(sortBy));
 
         return tariffRepository.findAllByLanguage_LanguageName(languageName, pageable)
                 .stream()
@@ -39,10 +40,10 @@ public class GeneralInfoServiceImpl implements GeneralInfoService {
     }
 
     @Override
-    public List<LocationDto> getInfoForLocationTable(int pageNum) {
+    public List<LocationDto> getInfoForLocationTable(int pageNum, String sortBy) {
         log.info("[GeneralInfoServiceImpl] createLocationTable");
 
-        Pageable pageable = PageRequest.of(pageNum, 3);
+        Pageable pageable = PageRequest.of(pageNum, 3, Sort.by(sortBy));
 
         return locationRepository.findAll(pageable)
                 .stream()

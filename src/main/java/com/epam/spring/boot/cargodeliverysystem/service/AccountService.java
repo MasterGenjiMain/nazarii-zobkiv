@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AccountService {
 
-    List<ReceiptDto> getAllUserReceipts(Long userId, int pageNum);
+    List<ReceiptDto> getAllUserReceipts(Long userId, int pageNum, String sortBy);
 
     ReceiptDto pay(Long receiptId);
 
