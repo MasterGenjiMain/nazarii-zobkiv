@@ -2,8 +2,8 @@ package com.epam.spring.boot.cargodeliverysystem.service.impl;
 
 import com.epam.spring.boot.cargodeliverysystem.dto.ReceiptDto;
 import com.epam.spring.boot.cargodeliverysystem.dto.ReceiptStatusDto;
+import com.epam.spring.boot.cargodeliverysystem.exception.DeliveryAlreadyDeliveredException;
 import com.epam.spring.boot.cargodeliverysystem.exception.EntityNotFoundException;
-import com.epam.spring.boot.cargodeliverysystem.mapper.ReceiptMapper;
 import com.epam.spring.boot.cargodeliverysystem.mapper.ReceiptStatusMapper;
 import com.epam.spring.boot.cargodeliverysystem.model.DeliveryOrder;
 import com.epam.spring.boot.cargodeliverysystem.model.Receipt;
@@ -11,7 +11,7 @@ import com.epam.spring.boot.cargodeliverysystem.model.ReceiptStatus;
 import com.epam.spring.boot.cargodeliverysystem.repository.DeliveryOrderRepository;
 import com.epam.spring.boot.cargodeliverysystem.repository.ReceiptRepository;
 import com.epam.spring.boot.cargodeliverysystem.repository.ReceiptStatusRepository;
-import com.epam.spring.boot.cargodeliverysystem.service.ApproveService;
+import com.epam.spring.boot.cargodeliverysystem.service.ReceiptManagerService;
 import com.epam.spring.boot.cargodeliverysystem.service.ChangeReceiptStatusService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,14 +23,13 @@ import java.sql.Timestamp;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ApproveServiceImpl implements ApproveService {
+public class ReceiptManagerServiceImpl implements ReceiptManagerService {
 
-    private static final Long CLOSED_STATUS = 7L;
-    private static final Long CANCELED_STATUS = 8L;
-    private static final Long APPROVED_STATUS = 2L;
+    private static final long DELIVERED_STATUS = 6L;
+    private static final long CANCELED_STATUS = 8L;
+    private static final long APPROVED_STATUS = 2L;
 
     private final ReceiptRepository receiptRepository;
-    private final ReceiptMapper receiptMapper;
     private final ReceiptStatusRepository receiptStatusRepository;
     private final DeliveryOrderRepository deliveryOrderRepository;
     private final ReceiptStatusMapper receiptStatusMapper;
@@ -43,17 +42,20 @@ public class ApproveServiceImpl implements ApproveService {
         Receipt persistedReceipt = receiptRepository.findById(receiptId)
                 .orElseThrow(EntityNotFoundException::new);
         Long currentStatusId = persistedReceipt.getReceiptStatus().getId();
-        ReceiptStatus newReceiptStatus = null;
-        if (currentStatusId < CLOSED_STATUS - 1) {
+        ReceiptStatus newReceiptStatus;
+        if (currentStatusId < DELIVERED_STATUS) {
             log.debug("Current receipt with id {} not closed", receiptId);
             newReceiptStatus = receiptStatusRepository.findById(++currentStatusId)
                     .orElseThrow(EntityNotFoundException::new);
-        } else if (currentStatusId == CLOSED_STATUS - 1) {
-            log.debug("Current receipt with id {} pre closed", receiptId);
-            DeliveryOrder persistedDeliveryOrder = persistedReceipt.getDeliveryOrder();
-            persistedDeliveryOrder.setReceivingDate(new Timestamp(System.currentTimeMillis()));
-            deliveryOrderRepository.save(persistedDeliveryOrder);
-            return receiptMapper.mapReceiptToReceiptDto(persistedReceipt);
+
+            if (currentStatusId == DELIVERED_STATUS) {
+                log.debug("Current receipt with id {} pre closed", receiptId);
+                DeliveryOrder persistedDeliveryOrder = persistedReceipt.getDeliveryOrder();
+                persistedDeliveryOrder.setReceivingDate(new Timestamp(System.currentTimeMillis()));
+                deliveryOrderRepository.save(persistedDeliveryOrder);
+            }
+        } else {
+            throw new DeliveryAlreadyDeliveredException();
         }
         return changeReceiptStatus(receiptId, receiptStatusMapper.mapReceiptStatusToReceiptStatusDto(newReceiptStatus));
     }

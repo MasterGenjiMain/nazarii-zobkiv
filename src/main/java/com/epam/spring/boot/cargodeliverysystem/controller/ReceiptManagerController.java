@@ -1,7 +1,7 @@
 package com.epam.spring.boot.cargodeliverysystem.controller;
 
 import com.epam.spring.boot.cargodeliverysystem.dto.ReceiptDto;
-import com.epam.spring.boot.cargodeliverysystem.service.ApproveService;
+import com.epam.spring.boot.cargodeliverysystem.service.ReceiptManagerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -9,30 +9,30 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/approve")
+@RequestMapping("/receiptManager")
 @RequiredArgsConstructor
-public class ApproveController {
+public class ReceiptManagerController {
 
-    private final ApproveService approveService;
+    private final ReceiptManagerService receiptManagerService;
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "nextStatus/{id}")
     ReceiptDto setNextReceiptStatus(@PathVariable Long id) {
         log.info("[ApproveController] setNextReceiptStatus by id {} ", id);
-        return approveService.nextStatus(id);
+        return receiptManagerService.nextStatus(id);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "approve/{id}")
     ReceiptDto approveReceipt(@PathVariable Long id){
         log.info("[ApproveController] approveReceipt by id {} ", id);
-        return approveService.approve(id);
+        return receiptManagerService.approve(id);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "cansel/{id}")
     ReceiptDto canselReceipt(@PathVariable Long id) {
         log.info("[ApproveController] approveReceipt by id {} ", id);
-        return approveService.cansel(id);
+        return receiptManagerService.cansel(id);
     }
 }

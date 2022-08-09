@@ -2,11 +2,11 @@ package com.epam.spring.boot.cargodeliverysystem.exception;
 
 import com.epam.spring.boot.cargodeliverysystem.model.enums.ErrorType;
 
-public class EntityNotFoundException extends ServiceException {
+public class DeliveryAlreadyDeliveredException extends ServiceException{
 
-    private static final String DEFAULT_MESSAGE = "Entity not found";
+    private static final String DEFAULT_MESSAGE = "Delivery already delivered";
 
-    public EntityNotFoundException() {
+    public DeliveryAlreadyDeliveredException() {
         super(DEFAULT_MESSAGE);
     }
 
