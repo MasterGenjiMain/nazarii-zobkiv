@@ -28,7 +28,7 @@ public class GeneralInfoServiceImpl implements GeneralInfoService {
     private final LocationMapper locationMapper;
 
     @Override
-    public List<TariffDto> getInfoForTariffTableWithName(String languageName, int pageNum, String sortBy) {
+    public List<TariffDto> getInfoAboutTariffsWithLanguageName(String languageName, int pageNum, String sortBy) {
         log.info("[GeneralInfoServiceImpl] createTariffsTable");
 
         Pageable pageable = PageRequest.of(pageNum, 3, Sort.by(sortBy));
@@ -40,7 +40,7 @@ public class GeneralInfoServiceImpl implements GeneralInfoService {
     }
 
     @Override
-    public List<LocationDto> getInfoForLocationTable(int pageNum, String sortBy) {
+    public List<LocationDto> getInfoAboutLocations(int pageNum, String sortBy) {
         log.info("[GeneralInfoServiceImpl] createLocationTable");
 
         Pageable pageable = PageRequest.of(pageNum, 3, Sort.by(sortBy));

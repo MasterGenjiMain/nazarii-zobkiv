@@ -2,6 +2,7 @@ package com.epam.spring.boot.cargodeliverysystem.service.impl;
 
 import com.epam.spring.boot.cargodeliverysystem.dto.UserDto;
 import com.epam.spring.boot.cargodeliverysystem.exception.EntityNotFoundException;
+import com.epam.spring.boot.cargodeliverysystem.exception.PasswordsDidntMatchException;
 import com.epam.spring.boot.cargodeliverysystem.exception.UserAlreadyExistsException;
 import com.epam.spring.boot.cargodeliverysystem.mapper.UserMapper;
 import com.epam.spring.boot.cargodeliverysystem.model.Role;
@@ -31,6 +32,10 @@ public class RegistrationServiceImpl implements RegistrationService {
         log.info("[RegistrationServiceImpl] userRegistration with email {}", userDto.getEmail());
         if (userRepository.existsByEmail(userDto.getEmail()) || userRepository.existsByUsername(userDto.getUsername())) {
             throw new UserAlreadyExistsException();
+        }
+
+        if (!userDto.getPassword().equals(userDto.getRepeatPassword())) {
+            throw new PasswordsDidntMatchException();
         }
 
         User user = userMapper.mapUserDtoToUser(userDto);

@@ -24,7 +24,7 @@ public class GeneralInfoController {
                                           @RequestParam(defaultValue = "0") int pageNum,
                                           @RequestParam(required = false) String sortBy){
         log.info("[GeneralInfoController] getTariffsInfo");
-        return generalInfoService.getInfoForTariffTableWithName(languageName, pageNum, sortBy);
+        return generalInfoService.getInfoAboutTariffsWithLanguageName(languageName, pageNum, sortBy);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -32,7 +32,7 @@ public class GeneralInfoController {
     public List<LocationDto> getLocationsInfo(@RequestParam(defaultValue = "0") int pageNum,
                                               @RequestParam(required = false) String sortBy){
         log.info("[GeneralInfoController] getLocationsInfo");
-        return generalInfoService.getInfoForLocationTable(pageNum, sortBy);
+        return generalInfoService.getInfoAboutLocations(pageNum, sortBy);
     }
 
 }

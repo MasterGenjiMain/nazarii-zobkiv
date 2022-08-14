@@ -78,7 +78,7 @@ public class ReceiptManagerServiceImpl implements ReceiptManagerService {
         return changeReceiptStatus(receiptId, receiptStatusMapper.mapReceiptStatusToReceiptStatusDto(canselStatus));
     }
 
-    public ReceiptDto changeReceiptStatus(Long receiptId, ReceiptStatusDto receiptStatusDto) {
+    private ReceiptDto changeReceiptStatus(Long receiptId, ReceiptStatusDto receiptStatusDto) {
         log.info("[ApproveServiceImpl] changeReceiptStatus with id {}", receiptId);
         return changeReceiptStatusService.changeReceiptStatus(receiptId, receiptStatusDto, receiptRepository);
     }

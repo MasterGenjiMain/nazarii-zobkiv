@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class DeliveryCalculatorImpl implements DeliveryCalculatorService {
+public class DeliveryCalculatorServiceImpl implements DeliveryCalculatorService {
 
     private static final int VOLUME_DIVIDER = 1000;
     private static final int VOLUME_PRICE = 2;
