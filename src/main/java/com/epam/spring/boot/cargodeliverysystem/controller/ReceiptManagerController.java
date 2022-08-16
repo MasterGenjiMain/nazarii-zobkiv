@@ -30,9 +30,9 @@ public class ReceiptManagerController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping(value = "cansel/{id}")
-    ReceiptDto canselReceipt(@PathVariable Long id) {
-        log.info("[ApproveController] approveReceipt by id {} ", id);
-        return receiptManagerService.cansel(id);
+    @PutMapping(value = "cancel/{id}")
+    ReceiptDto cancelReceipt(@PathVariable Long id) {
+        log.info("[ApproveController] cancelReceipt by id {} ", id);
+        return receiptManagerService.cancel(id);
     }
 }

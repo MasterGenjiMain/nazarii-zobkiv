@@ -71,7 +71,7 @@ public class ReceiptManagerServiceImpl implements ReceiptManagerService {
 
     @Override
     @Transactional
-    public ReceiptDto cansel(Long receiptId) {
+    public ReceiptDto cancel(Long receiptId) {
         log.info("[ApproveServiceImpl] cansel with id {}", receiptId);
         ReceiptStatus canselStatus = receiptStatusRepository.findById(CANCELED_STATUS)
                 .orElseThrow(EntityNotFoundException::new);

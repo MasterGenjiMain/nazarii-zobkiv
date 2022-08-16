@@ -72,7 +72,7 @@ public class ReceiptManagerServiceImplTest {
         when(receiptStatusRepository.findById(anyLong())).thenReturn(Optional.of(receiptStatus));
         when(changeReceiptStatusService.changeReceiptStatus(1L, canceledStatus, receiptRepository)).thenReturn(receiptDto);
 
-        ReceiptDto resultReceiptDto = receiptManagerService.cansel(1L);
+        ReceiptDto resultReceiptDto = receiptManagerService.cancel(1L);
 
         assertThat(resultReceiptDto.getReceiptStatus(), equalTo(canceledStatus));
     }

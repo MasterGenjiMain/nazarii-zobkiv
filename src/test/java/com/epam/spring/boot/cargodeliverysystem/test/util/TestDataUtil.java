@@ -115,6 +115,20 @@ public class TestDataUtil {
     public static Location createLocation() {
         return Location.builder()
                 .locationName("testLocationName")
+                .city(createCity())
+                .activeStatus(createActiveStatus())
+                .build();
+    }
+
+    private static ActiveStatus createActiveStatus() {
+        return ActiveStatus.builder()
+                .activeStatusName("testActiveStatusName")
+                .build();
+    }
+
+    private static City createCity() {
+        return City.builder()
+                .cityName("testCityName")
                 .build();
     }
 
@@ -131,6 +145,20 @@ public class TestDataUtil {
     public static LocationDto createLocationDto() {
         return LocationDto.builder()
                 .locationName("testLocationName")
+                .city(createCityDto())
+                .activeStatus(createActiveStatusDto())
+                .build();
+    }
+
+    private static ActiveStatusDto createActiveStatusDto() {
+        return ActiveStatusDto.builder()
+                .activeStatusName("testActiveStatusName")
+                .build();
+    }
+
+    private static CityDto createCityDto() {
+        return CityDto.builder()
+                .cityName("testCityName")
                 .build();
     }
 
@@ -189,7 +217,7 @@ public class TestDataUtil {
                 .build();
     }
 
-    private static DeliveryOrderDto createDeliveryOrderDto() {
+    public static DeliveryOrderDto createDeliveryOrderDto() {
         return DeliveryOrderDto.builder()
                 .locationFrom(createLocationDto())
                 .locationTo(createLocationDto())

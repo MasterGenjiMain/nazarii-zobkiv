@@ -8,5 +8,5 @@ public interface ReceiptManagerService {
 
     ReceiptDto approve(Long receiptId);
 
-    ReceiptDto cansel(Long receiptId);
+    ReceiptDto cancel(Long receiptId);
 }
