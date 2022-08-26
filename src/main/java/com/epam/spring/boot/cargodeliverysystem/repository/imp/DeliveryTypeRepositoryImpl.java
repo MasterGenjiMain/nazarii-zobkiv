@@ -4,13 +4,14 @@ import com.epam.spring.boot.cargodeliverysystem.model.DeliveryType;
 import com.epam.spring.boot.cargodeliverysystem.repository.DeliveryTypeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Component
+@Repository
 public class DeliveryTypeRepositoryImpl implements DeliveryTypeRepository {
 
     private final List<DeliveryType> deliveryTypeList = new ArrayList<>();

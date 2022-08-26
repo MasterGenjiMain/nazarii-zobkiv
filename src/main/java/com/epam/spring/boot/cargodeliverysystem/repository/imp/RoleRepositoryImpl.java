@@ -4,12 +4,13 @@ import com.epam.spring.boot.cargodeliverysystem.model.Role;
 import com.epam.spring.boot.cargodeliverysystem.repository.RoleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@Component
+@Repository
 public class RoleRepositoryImpl implements RoleRepository {
 
     private final List<Role> roleList = new ArrayList<>();

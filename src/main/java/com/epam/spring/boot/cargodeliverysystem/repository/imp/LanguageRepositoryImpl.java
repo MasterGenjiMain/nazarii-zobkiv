@@ -4,12 +4,13 @@ import com.epam.spring.boot.cargodeliverysystem.model.Language;
 import com.epam.spring.boot.cargodeliverysystem.repository.LanguageRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@Component
+@Repository
 public class LanguageRepositoryImpl implements LanguageRepository {
 
     private final List<Language> languageList = new ArrayList<>();

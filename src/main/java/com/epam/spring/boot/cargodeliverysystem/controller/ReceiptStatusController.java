@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/receiptStatuses")
+@RequestMapping("/receiptStatus")
 @RequiredArgsConstructor
 public class ReceiptStatusController {
 

@@ -4,12 +4,13 @@ import com.epam.spring.boot.cargodeliverysystem.model.City;
 import com.epam.spring.boot.cargodeliverysystem.repository.CityRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@Component
+@Repository
 public class CityRepositoryImpl implements CityRepository {
 
     private final List<City> cityList = new ArrayList<>();

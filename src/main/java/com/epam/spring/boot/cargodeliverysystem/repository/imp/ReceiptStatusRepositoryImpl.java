@@ -4,12 +4,13 @@ import com.epam.spring.boot.cargodeliverysystem.model.ReceiptStatus;
 import com.epam.spring.boot.cargodeliverysystem.repository.ReceiptStatusRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@Component
+@Repository
 public class ReceiptStatusRepositoryImpl implements ReceiptStatusRepository {
 
     private final List<ReceiptStatus> receiptStatusList = new ArrayList<>();

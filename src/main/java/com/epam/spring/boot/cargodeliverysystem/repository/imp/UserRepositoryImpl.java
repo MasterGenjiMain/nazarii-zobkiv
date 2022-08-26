@@ -4,12 +4,13 @@ import com.epam.spring.boot.cargodeliverysystem.model.User;
 import com.epam.spring.boot.cargodeliverysystem.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@Component
+@Repository
 public class UserRepositoryImpl implements UserRepository {
 
     private final List<User> userList = new ArrayList<>();
