@@ -31,7 +31,7 @@ public class ReceiptServiceImpl implements ReceiptService {
     @Override
     public ReceiptDto getReceipt(long id) {
         log.info("getReceipt by id {}", id);
-        Receipt receipt = receiptRepository.getReceipt(id);
+        Receipt receipt = receiptRepository.getReceiptById(id);
         return receiptMapper.mapReceiptToReceiptDto(receipt);
     }
 

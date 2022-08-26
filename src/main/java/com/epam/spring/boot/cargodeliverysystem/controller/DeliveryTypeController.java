@@ -14,7 +14,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/deliveryTypes")
+@RequestMapping("/deliveryType")
 @RequiredArgsConstructor
 public class DeliveryTypeController {
 

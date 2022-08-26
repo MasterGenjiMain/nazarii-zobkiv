@@ -5,12 +5,13 @@ import com.epam.spring.boot.cargodeliverysystem.model.Receipt;
 import com.epam.spring.boot.cargodeliverysystem.repository.ReceiptRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@Component
+@Repository
 public class ReceiptRepositoryImpl implements ReceiptRepository {
 
     private final List<Receipt> receiptList = new ArrayList<>();
@@ -21,7 +22,7 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
     }
 
     @Override
-    public Receipt getReceipt(long id) {
+    public Receipt getReceiptById(long id) {
         log.info("[Repository] getReceipt by id {} ", id);
         return receiptList.stream()
                 .filter(receipt -> receipt.getId() == id)

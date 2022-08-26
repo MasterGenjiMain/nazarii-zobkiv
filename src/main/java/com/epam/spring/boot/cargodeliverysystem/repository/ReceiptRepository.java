@@ -8,7 +8,7 @@ public interface ReceiptRepository {
 
     List<Receipt> getAllReceipts();
 
-    Receipt getReceipt(long id);
+    Receipt getReceiptById(long id);
 
     Receipt createReceipt(Receipt receipt);
 

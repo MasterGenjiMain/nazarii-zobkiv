@@ -5,12 +5,13 @@ import com.epam.spring.boot.cargodeliverysystem.model.Location;
 import com.epam.spring.boot.cargodeliverysystem.repository.LocationRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@Component
+@Repository
 public class LocationRepositoryImpl implements LocationRepository {
 
     private final List<Location> locationList = new ArrayList<>();

@@ -8,7 +8,7 @@ public interface DeliveryOrderRepository {
 
     List<DeliveryOrder> getAllDeliveryOrders();
 
-    DeliveryOrder getDeliveryOrder(long id);
+    DeliveryOrder getDeliveryOrderById(long id);
 
     DeliveryOrder createDeliveryOrder(DeliveryOrder deliveryOrder);
 

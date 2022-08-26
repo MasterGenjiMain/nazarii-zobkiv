@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/cities")
+@RequestMapping("/city")
 @RequiredArgsConstructor
 public class CityController {
 

@@ -5,18 +5,19 @@ import com.epam.spring.boot.cargodeliverysystem.model.DeliveryOrder;
 import com.epam.spring.boot.cargodeliverysystem.repository.DeliveryOrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@Component
+@Repository
 public class DeliveryOrderRepositoryImpl implements DeliveryOrderRepository {
 
     private final List<DeliveryOrder> deliveryOrderList = new ArrayList<>();
 
     @Override
-    public DeliveryOrder getDeliveryOrder(long id) {
+    public DeliveryOrder getDeliveryOrderById(long id) {
         log.info("[Repository] getDeliveryOrder by id {} ", id);
         return deliveryOrderList.stream()
                 .filter(ord -> ord.getId() == id)

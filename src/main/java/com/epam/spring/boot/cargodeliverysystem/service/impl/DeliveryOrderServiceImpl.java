@@ -33,7 +33,7 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     @Override
     public DeliveryOrderDto getDeliveryOrder(long id) {
         log.info("getDeliveryOrder by id {}", id);
-        DeliveryOrder deliveryOrder = deliveryOrderRepository.getDeliveryOrder(id);
+        DeliveryOrder deliveryOrder = deliveryOrderRepository.getDeliveryOrderById(id);
         return deliveryOrderMapper.mapDeliveryOrderToDeliveryOrderDto(deliveryOrder);
     }
 
