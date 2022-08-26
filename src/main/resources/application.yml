@@ -1,0 +1,16 @@
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "info, health"
+  endpoint:
+    health:
+      show-details: always
+
+info:
+  application:
+    author: Nazarii Zobkiv
+    description: Cargo Management System (CDS)
